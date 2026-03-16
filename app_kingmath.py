@@ -26,11 +26,10 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-# กู้คืน Title ของ King Math Pro ให้ถูกต้อง
 st.markdown("""
 <div class="main-header">
     <h1>👑 King Math Pro <span style="font-size: 20px; background: #f1c40f; color: #333; padding: 5px 15px; border-radius: 20px; vertical-align: middle;">Critical Thinking</span></h1>
-    <p>ระบบสร้างข้อสอบวิเคราะห์คณิตศาสตร์ระดับแนวหน้า (โจทย์ปัญหา & เชาวน์ปัญญา) พร้อมเฉลยละเอียด</p>
+    <p>ระบบสร้างข้อสอบวิเคราะห์คณิตศาสตร์ระดับแนวหน้า (โจทย์ปัญหา & เชาวน์ปัญญา) พร้อมเฉลยละเอียดขั้นสุด</p>
 </div>
 """, unsafe_allow_html=True)
 
@@ -42,7 +41,6 @@ box_html = "<span style='display: inline-block; width: 24px; height: 24px; borde
 
 def get_vertical_fraction(num, den, color="#c0392b", is_bold=True):
     weight = "bold" if is_bold else "normal"
-    # ใช้ white-space: nowrap ป้องกันการแตกบรรทัด และเพิ่ม padding ให้เส้นคั่นดูสวยงามสมดุล
     return f"""<span style="display:inline-flex; flex-direction:column; vertical-align:middle; text-align:center; line-height:1.4; margin: 0 6px; font-family:'Sarabun', sans-serif; white-space: nowrap;"><span style="border-bottom: 2px solid {color}; padding: 2px 6px; font-weight:{weight}; color:{color};">{num}</span><span style="padding: 2px 6px; font-weight:{weight}; color:{color};">{den}</span></span>"""
 
 def get_vertical_math(top_chars, bottom_chars, result_chars, operator="+"):
@@ -112,20 +110,18 @@ def generate_questions_logic(level, sub_t, num_q, is_challenge):
                     sorted_d = sorted(digits, reverse=True)
                     q = f"<b>{name}</b> ได้รับบัตรตัวเลข 5 ใบ คือ <b>{', '.join(map(str, digits))}</b> <br>ถ้านำบัตรตัวเลขทั้งหมดมาสร้างเป็น <b>จำนวน 3 หลัก</b> และ <b>จำนวน 2 หลัก</b> ที่เมื่อนำมาคูณกันแล้วจะได้ <b>'ผลคูณที่มีค่ามากที่สุด'</b><br>ผลคูณนั้นคือเท่าไร?"
                     sol = f"""<span style='color: #2c3e50;'><b>วิธีคิดวิเคราะห์เชิงลึก (เทคนิคสมดุลและคูณไขว้):</b><br>
-                    หัวใจสำคัญของการทำให้ผลคูณมีค่ามากที่สุด คือ <b>"การสร้างสมดุล"</b> และการนำเลขค่ามากไปไขว้คูณกับกลุ่มตัวเลขที่ใหญ่ที่สุดครับ!<br>
+                    หัวใจสำคัญของการทำให้ผลคูณมีค่ามากที่สุด คือ <b>"การสร้างสมดุล"</b> และการนำเลขค่ามากไปไขว้คูณกับกลุ่มตัวเลขที่ใหญ่ที่สุด<br>
                     <b>ขั้นตอนที่ 1: เรียงลำดับตัวเลขจากมากไปน้อย</b><br>
-                    &nbsp;&nbsp;&nbsp;👉 จะได้ตัวเลขคือ <b>{sorted_d[0]} > {sorted_d[1]} > {sorted_d[2]} > {sorted_d[3]} > {sorted_d[4]}</b><br>
-                    <b>ขั้นตอนที่ 2: วางตัวเลขใน "หลักหน้าสุด" (หลักที่ทรงพลังที่สุด)</b><br>
-                    &nbsp;&nbsp;&nbsp;👉 นำเลขที่มากที่สุด 2 ตัวแรก (คือ {sorted_d[0]} และ {sorted_d[1]}) มาเป็นตัวนำทัพ<br>
-                    &nbsp;&nbsp;&nbsp;👉 <i>ทำไมต้องแยกกัน?</i> เพราะถ้าเอาเลขมากไปกระจุกอยู่ด้วยกัน จะสู้การกระจายพลังไปเป็นหลักหน้าของทั้งสองจำนวนไม่ได้<br>
-                    &nbsp;&nbsp;&nbsp;👉 <i>ทำไม {sorted_d[0]} ต้องไปอยู่จำนวน 2 หลัก?</i> เพราะจำนวน 2 หลัก จะรับบทเป็น "ตัวคูณ" ที่ไปคูณกระจุยกับตัวเลข 3 หลักทุกตำแหน่ง การเอาเลขใหญ่สุดเป็นตัวคูณจะทวีคูณค่าได้มหาศาลครับ! ➔ ตอนนี้เราจะได้โครงสร้าง: <b>{sorted_d[1]}🔲🔲  ×  {sorted_d[0]}🔲</b><br>
-                    <b>ขั้นตอนที่ 3: วางตัวเลขในตำแหน่งถัดไป (เทคนิคคูณไขว้)</b><br>
-                    &nbsp;&nbsp;&nbsp;👉 เลข <b>{sorted_d[2]}</b> (มากสุดในกลุ่มที่เหลือ) เราต้องนำมันไปจับคู่ให้โดนคูณด้วยเลข <b>{sorted_d[0]}</b> ดังนั้นต้องส่งมันไปอยู่ฝั่งตรงข้าม ➔ โครงสร้าง: <b>{sorted_d[1]}{sorted_d[2]}🔲  ×  {sorted_d[0]}🔲</b><br>
-                    &nbsp;&nbsp;&nbsp;👉 เลข <b>{sorted_d[3]}</b> ต้องนำไปไขว้คูณกับก้อนที่ใหญ่ที่สุดในตอนนี้ (คือ {sorted_d[1]}{sorted_d[2]}0) จึงต้องนำไปใส่ในจำนวน 2 หลัก ➔ โครงสร้าง: <b>{sorted_d[1]}{sorted_d[2]}🔲  ×  {sorted_d[0]}{sorted_d[3]}</b><br>
-                    <b>ขั้นตอนที่ 4: เติมหลักหน่วยตัวสุดท้าย</b><br>
-                    &nbsp;&nbsp;&nbsp;👉 นำเลขน้อยสุด <b>{sorted_d[4]}</b> ไปใส่ช่องที่เหลือ ➔ จะได้ตัวเลขที่สมบูรณ์คือ <b>{best_pair[0]}</b> และ <b>{best_pair[1]}</b><br>
-                    <b>ขั้นตอนที่ 5: ตรวจสอบผลคูณ</b><br>
-                    &nbsp;&nbsp;&nbsp;👉 คำนวณ {best_pair[0]} × {best_pair[1]} = <b>{max_prod:,}</b><br>
+                    &nbsp;&nbsp;&nbsp;👉 จะได้ลำดับ: <b>{sorted_d[0]} > {sorted_d[1]} > {sorted_d[2]} > {sorted_d[3]} > {sorted_d[4]}</b><br>
+                    <b>ขั้นตอนที่ 2: วางตัวเลขหลักหน้าสุดเพื่อสร้างสมดุลเชิงสมการ</b><br>
+                    &nbsp;&nbsp;&nbsp;👉 แยกตัวเลขมากที่สุด 2 ตัว ({sorted_d[0]} และ {sorted_d[1]}) ให้อยู่คนละฝั่งการคูณ (เพื่อกระจายพลัง)<br>
+                    &nbsp;&nbsp;&nbsp;👉 <b>สมการตัวตั้งต้น:</b> {sorted_d[1]}🔲🔲  ×  {sorted_d[0]}🔲<br>
+                    <b>ขั้นตอนที่ 3: วางตำแหน่งที่เหลือด้วยหลักการคูณไขว้</b><br>
+                    &nbsp;&nbsp;&nbsp;👉 เลข {sorted_d[2]} ต้องไขว้ไปคูณเลข {sorted_d[0]} ดังนั้นต้องไปอยู่ฝั่งซ้าย: {sorted_d[1]}{sorted_d[2]}🔲  ×  {sorted_d[0]}🔲<br>
+                    &nbsp;&nbsp;&nbsp;👉 เลข {sorted_d[3]} ต้องไขว้ไปคูณก้อนที่ใหญ่กว่า ({sorted_d[1]}{sorted_d[2]}) ดังนั้นไปอยู่ฝั่งขวา: {sorted_d[1]}{sorted_d[2]}🔲  ×  {sorted_d[0]}{sorted_d[3]}<br>
+                    <b>ขั้นตอนที่ 4: สรุปผลลัพธ์</b><br>
+                    &nbsp;&nbsp;&nbsp;👉 นำ {sorted_d[4]} ใส่หลักสุดท้าย <b>สมการล่าสุด: {best_pair[0]} × {best_pair[1]}</b><br>
+                    &nbsp;&nbsp;&nbsp;👉 คำนวณ: {best_pair[0]} × {best_pair[1]} = <b>{max_prod:,}</b><br>
                     <b>ตอบ: {max_prod:,}</b></span>"""
                 else:
                     if is_p12:
@@ -134,10 +130,11 @@ def generate_questions_logic(level, sub_t, num_q, is_challenge):
                         min_v = int("".join(map(str, sorted(digits))))
                         diff = max_v - min_v
                         q = f"<b>{name}</b> มีบัตรตัวเลข 3 ใบ คือ <b>{digits[0]}, {digits[1]}, และ {digits[2]}</b> <br>ถ้านำบัตรตัวเลขทั้งหมดมาเรียงต่อกันเป็นจำนวน 3 หลัก จงหาผลต่างของจำนวนที่<b>มากที่สุด</b>และจำนวนที่<b>น้อยที่สุด</b>ที่สร้างได้?"
-                        sol = f"""<span style='color: #2c3e50;'><b>วิธีทำอย่างละเอียด:</b><br>
-                        <b>ขั้นตอนที่ 1:</b> สร้างจำนวนมากที่สุด นำเลขค่ามากไว้หน้าสุด = <b>{max_v}</b><br>
-                        <b>ขั้นตอนที่ 2:</b> สร้างจำนวนน้อยที่สุด นำเลขค่าน้อยไว้หน้าสุด = <b>{min_v}</b><br>
-                        <b>ขั้นตอนที่ 3:</b> หาผลต่างโดยนำตัวมากตั้ง ลบด้วยตัวน้อย: {max_v} - {min_v} = <b>{diff}</b><br>
+                        sol = f"""<span style='color: #2c3e50;'><b>วิธีทำอย่างละเอียด (สร้างสมการผลต่าง):</b><br>
+                        <b>ขั้นตอนที่ 1:</b> จำนวนมากที่สุด (เรียงเลขมากไปน้อย) ➔ <b>สมการค่ามาก = {max_v}</b><br>
+                        <b>ขั้นตอนที่ 2:</b> จำนวนน้อยที่สุด (เรียงเลขน้อยไปมาก) ➔ <b>สมการค่าน้อย = {min_v}</b><br>
+                        <b>ขั้นตอนที่ 3:</b> สร้างสมการผลต่าง: 🔲 = {max_v} - {min_v}<br>
+                        &nbsp;&nbsp;&nbsp;👉 คำนวณ 🔲 = <b>{diff}</b><br>
                         <b>ตอบ: {diff}</b></span>"""
                     else: 
                         q_type = random.choice(["even", "div5"])
@@ -152,15 +149,14 @@ def generate_questions_logic(level, sub_t, num_q, is_challenge):
                             rem = sorted(others + targets[1:], reverse=True)
                             ans_num = int("".join(map(str, rem + [unit])))
                             q = f"<b>{name}</b> มีบัตรตัวเลข {num_digits} ใบ คือ <b>{', '.join(map(str, c_digits))}</b> <br>จงหา<b>จำนวนคู่ที่มากที่สุด</b>ที่สามารถสร้างได้?"
-                            sol = f"""<span style='color: #2c3e50;'><b>วิธีคิดวิเคราะห์อย่างละเอียด:</b><br>
-                            <b>ขั้นตอนที่ 1: วิเคราะห์เงื่อนไข "จำนวนคู่"</b><br>
-                            &nbsp;&nbsp;&nbsp;👉 กฎคือหลักหน่วยต้องเป็นเลขคู่เท่านั้น! เลขคู่ที่เรามีในมือคือ <b>{targets}</b><br>
-                            <b>ขั้นตอนที่ 2: วิเคราะห์เงื่อนไข "ค่ามากที่สุด"</b><br>
-                            &nbsp;&nbsp;&nbsp;👉 ถ้าอยากให้จำนวนมีค่ามากๆ เราต้องหวงตัวเลขค่าเยอะเอาไว้ใส่ในหลักหน้าสุด (หลักพัน/หลักหมื่น)<br>
-                            &nbsp;&nbsp;&nbsp;👉 ดังนั้น เราต้องยอมเสียสละเลขคู่ที่ <b>น้อยที่สุด</b> (คือ <b>{unit}</b>) ไปล็อกไว้ที่ตำแหน่งหลักหน่วยเลยครับ<br>
-                            <b>ขั้นตอนที่ 3: จัดเรียงตัวเลขที่เหลือ</b><br>
-                            &nbsp;&nbsp;&nbsp;👉 นำเลขที่เหลือในมือทั้งหมด มาเรียงจาก <b>มากไปน้อย</b> ไว้ด้านหน้า<br>
-                            &nbsp;&nbsp;&nbsp;👉 จะประกอบร่างได้เป็น <b>{ans_num:,}</b><br>
+                            sol = f"""<span style='color: #2c3e50;'><b>วิธีคิดวิเคราะห์อย่างละเอียด (จัดรูปสมการตำแหน่งเลข):</b><br>
+                            <b>ขั้นตอนที่ 1: ล็อกเงื่อนไข "จำนวนคู่"</b><br>
+                            &nbsp;&nbsp;&nbsp;👉 ตัวแปรตำแหน่งหลักหน่วยต้องเป็นเลขคู่เท่านั้น ซึ่งคือกลุ่ม <b>{targets}</b><br>
+                            <b>ขั้นตอนที่ 2: สร้างสมการ "ค่ามากที่สุด"</b><br>
+                            &nbsp;&nbsp;&nbsp;👉 เราต้องผลักเลขที่น้อยที่สุดในกลุ่มเลขคู่ (คือ <b>{unit}</b>) ไปไว้ที่หลักหน่วย เพื่อสงวนเลขมากไว้ด้านหน้า<br>
+                            &nbsp;&nbsp;&nbsp;👉 <b>สมการล่าสุด: _ _ _ {unit}</b><br>
+                            <b>ขั้นตอนที่ 3: แทนค่าตัวแปรที่เหลือ</b><br>
+                            &nbsp;&nbsp;&nbsp;👉 นำเลขที่เหลือมาเรียงจากมากไปน้อย ➔ ได้เป็น <b>{ans_num:,}</b><br>
                             <b>ตอบ: {ans_num:,}</b></span>"""
                         else:
                             c_digits = random.sample([1,2,3,4,6,7,8,9], num_digits - 1) + [5]
@@ -168,15 +164,13 @@ def generate_questions_logic(level, sub_t, num_q, is_challenge):
                             rem = sorted([d for d in c_digits if d != 5])
                             ans_num = int("".join(map(str, rem + [5])))
                             q = f"<b>{name}</b> มีบัตรตัวเลข {num_digits} ใบ คือ <b>{', '.join(map(str, c_digits))}</b> <br>จงหา<b>จำนวนที่น้อยที่สุดที่หารด้วย 5 ลงตัว</b>?"
-                            sol = f"""<span style='color: #2c3e50;'><b>วิธีคิดวิเคราะห์อย่างละเอียด:</b><br>
-                            <b>ขั้นตอนที่ 1: วิเคราะห์เงื่อนไข "หารด้วย 5 ลงตัว"</b><br>
-                            &nbsp;&nbsp;&nbsp;👉 กฎเหล็กของการหาร 5 ลงตัวคือ หลักหน่วยต้องเป็น 0 หรือ 5 เท่านั้น!<br>
-                            &nbsp;&nbsp;&nbsp;👉 ในบัตรที่เรามี มีเลข <b>5</b> อยู่ จึงต้องนำ 5 ไปล็อกไว้ที่ตำแหน่งหลักหน่วยทันที<br>
-                            <b>ขั้นตอนที่ 2: วิเคราะห์เงื่อนไข "ค่าน้อยที่สุด"</b><br>
-                            &nbsp;&nbsp;&nbsp;👉 ถ้าอยากให้จำนวนมีค่าน้อยๆ เราต้องหลีกเลี่ยงการเอาเลขมากไปไว้ด้านหน้า<br>
-                            &nbsp;&nbsp;&nbsp;👉 ให้นำเลขที่เหลือในมือทั้งหมด มาเรียงจาก <b>น้อยไปมาก</b> ไว้ด้านหน้าของเลข 5<br>
-                            <b>ขั้นตอนที่ 3: สรุปตัวเลข</b><br>
-                            &nbsp;&nbsp;&nbsp;👉 จะประกอบร่างได้เป็น <b>{ans_num:,}</b><br>
+                            sol = f"""<span style='color: #2c3e50;'><b>วิธีคิดวิเคราะห์อย่างละเอียด (จัดรูปสมการตำแหน่งเลข):</b><br>
+                            <b>ขั้นตอนที่ 1: ล็อกเงื่อนไข "หารด้วย 5 ลงตัว"</b><br>
+                            &nbsp;&nbsp;&nbsp;👉 หลักหน่วยต้องเป็น 0 หรือ 5 เท่านั้น ในที่นี้เรามี <b>5</b> จึงล็อก 5 ไว้ที่หลักหน่วย<br>
+                            &nbsp;&nbsp;&nbsp;👉 <b>สมการล่าสุด: _ _ _ 5</b><br>
+                            <b>ขั้นตอนที่ 2: สร้างสมการ "ค่าน้อยที่สุด"</b><br>
+                            &nbsp;&nbsp;&nbsp;👉 นำเลขที่เหลือมาเรียงจากน้อยไปมาก เพื่อให้ตัวคูณหลักหน้าสุดมีค่าน้อย<br>
+                            &nbsp;&nbsp;&nbsp;👉 <b>สมการล่าสุด (ประกอบร่าง): {ans_num:,}</b><br>
                             <b>ตอบ: {ans_num:,}</b></span>"""
 
             # ---------------------------------------------------------
@@ -194,14 +188,22 @@ def generate_questions_logic(level, sub_t, num_q, is_challenge):
                     frac_wrong_s = get_vertical_fraction('🔲', A, color="#2c3e50", is_bold=False)
                     
                     q = f"<b>{name}</b> ตั้งใจจะนำจำนวนปริศนาไป <b>คูณด้วย {A}</b> แล้ว <b>ลบออกด้วย {B}</b><br>แต่เขาทำผิดพลาด สลับเครื่องหมายเป็นนำไปเขียนในรูปเศษส่วนคือ <b>{frac_wrong_q}</b> แล้วค่อย <b>บวกเพิ่ม {B}</b> ทำให้ได้ผลลัพธ์เป็น <b>{wrong_ans}</b><br>จงหาผลลัพธ์ที่แท้จริงตามความตั้งใจแรก?"
-                    sol = f"""<span style='color: #2c3e50;'><b>วิธีคิดอย่างละเอียด (สวมบทบาทนักสืบย้อนเวลา):</b><br>
-                    <b>ขั้นตอนที่ 1: ย้อนรอยสิ่งที่ทำผิด เพื่อหา 'จำนวนปริศนา'</b><br>
-                    &nbsp;&nbsp;&nbsp;👉 สิ่งที่ทำผิด: {frac_wrong_s} + {B} = {wrong_ans}<br>
-                    &nbsp;&nbsp;&nbsp;👉 ย้อนกลับขั้นที่ 1 (บวกเป็นลบ): {wrong_ans} - {B} = {wrong_ans - B}<br>
-                    &nbsp;&nbsp;&nbsp;👉 ย้อนกลับขั้นที่ 2 (ส่วนหารเปลี่ยนเป็นคูณ): {wrong_ans - B} × {A} = <b>{X}</b> (นี่คือจำนวนปริศนา!)<br>
-                    <b>ขั้นตอนที่ 2: คิดใหม่ให้ถูกต้องตามโจทย์สั่ง</b><br>
-                    &nbsp;&nbsp;&nbsp;👉 ความตั้งใจแรกคือ นำ {X} ไป <b>คูณ {A}</b> แล้ว <b>ลบ {B}</b><br>
-                    &nbsp;&nbsp;&nbsp;👉 คำนวณ: ({X} × {A}) - {B} = {X*A} - {B} = <b>{correct_ans:,}</b><br>
+                    sol = f"""<span style='color: #2c3e50;'><b>วิธีคิดอย่างละเอียด (สมมติให้ 🔲 คือจำนวนปริศนา และแก้สมการด้วยคุณสมบัติการเท่ากัน):</b><br>
+                    <b>ขั้นตอนที่ 1: สร้างสมการจากสิ่งที่ทำผิดพลาด</b><br>
+                    &nbsp;&nbsp;&nbsp;👉 {frac_wrong_s} + {B} = {wrong_ans}<br>
+                    <b>ขั้นตอนที่ 2: กำจัด +{B} เพื่อหาค่า 🔲</b><br>
+                    &nbsp;&nbsp;&nbsp;👉 นำ {B} มา<b>ลบออกทั้งสองข้างของสมการ</b><br>
+                    &nbsp;&nbsp;&nbsp;👉 จะได้: {frac_wrong_s} + {B} <b>- {B}</b> = {wrong_ans} <b>- {B}</b><br>
+                    &nbsp;&nbsp;&nbsp;👉 คำนวณฝั่งขวา: {wrong_ans} - {B} = {wrong_ans - B}<br>
+                    &nbsp;&nbsp;&nbsp;👉 <b>สมการล่าสุด:</b> {frac_wrong_s} = {wrong_ans - B}<br>
+                    <b>ขั้นตอนที่ 3: กำจัดตัวส่วน {A} (การหาร)</b><br>
+                    &nbsp;&nbsp;&nbsp;👉 นำ {A} มา<b>คูณทั้งสองข้างของสมการ</b><br>
+                    &nbsp;&nbsp;&nbsp;👉 จะได้: ({frac_wrong_s}) <b>× {A}</b> = ({wrong_ans - B}) <b>× {A}</b><br>
+                    &nbsp;&nbsp;&nbsp;👉 ฝั่งซ้ายตัวส่วน {A} ตัดกันหมดไป, ฝั่งขวาคำนวณได้ {X}<br>
+                    &nbsp;&nbsp;&nbsp;👉 <b>สมการล่าสุด (จำนวนปริศนา): 🔲 = {X}</b><br>
+                    <b>ขั้นตอนที่ 4: คำนวณใหม่ให้ถูกต้องตามความตั้งใจแรก</b><br>
+                    &nbsp;&nbsp;&nbsp;👉 โจทย์ต้องการให้นำ 🔲 ไป <b>คูณ {A}</b> แล้ว <b>ลบ {B}</b><br>
+                    &nbsp;&nbsp;&nbsp;👉 แทนค่า: ({X} × {A}) - {B} = {X*A} - {B} = <b>{correct_ans:,}</b><br>
                     <b>ตอบ: {correct_ans:,}</b></span>"""
                 else:
                     if is_p12:
@@ -213,26 +215,35 @@ def generate_questions_logic(level, sub_t, num_q, is_challenge):
                             wrong_ans = ans_true - (2 * x)
                             
                         q = f"<b>{name}</b> ตั้งใจจะนำจำนวนๆ หนึ่งไป <b>บวก</b> กับ {x} แต่เขาทำผิดโดยนำไป <b>ลบ</b> ด้วย {x} ทำให้ได้ผลลัพธ์เป็น <b>{wrong_ans}</b> <br>ผลลัพธ์ที่แท้จริงคือเท่าไร?"
-                        sol = f"""<span style='color: #2c3e50;'><b>วิธีคิดอย่างละเอียด (คิดย้อนกลับ):</b><br>
-                        <b>ขั้นตอนที่ 1: หาตัวเลขในตอนแรกสุด</b><br>
-                        &nbsp;&nbsp;&nbsp;👉 จากที่ทำผิดคือ: 🔲 - {x} = {wrong_ans}<br>
-                        &nbsp;&nbsp;&nbsp;👉 ย้ายฝั่งเปลี่ยน <b>ลบ เป็น บวก</b> จะได้ตัวเลขตอนแรกคือ: {wrong_ans} + {x} = <b>{wrong_ans + x}</b><br>
-                        <b>ขั้นตอนที่ 2: คิดเลขให้ถูกต้อง</b><br>
-                        &nbsp;&nbsp;&nbsp;👉 นำตัวเลขตอนแรก ({wrong_ans + x}) ไป <b>บวกด้วย {x}</b> ตามโจทย์สั่ง: {wrong_ans + x} + {x} = <b>{ans_true}</b><br>
+                        sol = f"""<span style='color: #2c3e50;'><b>วิธีคิดอย่างละเอียด (สมมติให้ 🔲 คือจำนวนตอนแรกสุด):</b><br>
+                        <b>ขั้นตอนที่ 1: สร้างสมการจากสิ่งที่ทำผิดพลาด</b><br>
+                        &nbsp;&nbsp;&nbsp;👉 🔲 - {x} = {wrong_ans}<br>
+                        <b>ขั้นตอนที่ 2: ใช้คุณสมบัติการเท่ากันเพื่อหาค่า 🔲</b><br>
+                        &nbsp;&nbsp;&nbsp;👉 ต้องการกำจัด -{x} จึง<b>นำ {x} มาบวกเพิ่มทั้งสองข้างของสมการ</b><br>
+                        &nbsp;&nbsp;&nbsp;👉 จะได้: 🔲 - {x} <b>+ {x}</b> = {wrong_ans} <b>+ {x}</b><br>
+                        &nbsp;&nbsp;&nbsp;👉 คำนวณผลลัพธ์ฝั่งขวา: {wrong_ans} + {x} = {wrong_ans + x}<br>
+                        &nbsp;&nbsp;&nbsp;👉 <b>สมการล่าสุด (จำนวนตอนแรก): 🔲 = {wrong_ans + x}</b><br>
+                        <b>ขั้นตอนที่ 3: คำนวณผลลัพธ์ที่ถูกต้อง</b><br>
+                        &nbsp;&nbsp;&nbsp;👉 ความตั้งใจแรกคือการนำไป <b>บวก {x}</b><br>
+                        &nbsp;&nbsp;&nbsp;👉 นำ {wrong_ans + x} + {x} = <b>{ans_true}</b><br>
                         <b>ตอบ: {ans_true}</b></span>"""
                     else:
                         x = random.randint(3, 12); n = random.randint(11, 30); wrong_ans = n; correct_ans = n * x * x
-                        
                         frac_wrong_q = get_vertical_fraction('จำนวนหนึ่ง', x)
                         frac_wrong_s = get_vertical_fraction('🔲', x, color="#2c3e50", is_bold=False)
                         
                         q = f"<b>{name}</b> ตั้งใจจะนำจำนวนๆ หนึ่งไป <b>คูณ</b> ด้วย {x} แต่ดันไปเขียนเป็นเศษส่วนในรูป <b>{frac_wrong_q}</b> ทำให้ผลลัพธ์ผิดเพี้ยนไปเป็น <b>{wrong_ans}</b> <br>ผลลัพธ์ที่ถูกต้องตามความตั้งใจแรกคือเท่าไร?"
-                        sol = f"""<span style='color: #2c3e50;'><b>วิธีคิดอย่างละเอียด (คิดย้อนกลับ):</b><br>
-                        <b>ขั้นตอนที่ 1: หาตัวเลขในตอนแรกสุด</b><br>
-                        &nbsp;&nbsp;&nbsp;👉 จากที่ทำผิดคือ: {frac_wrong_s} = {wrong_ans}<br>
-                        &nbsp;&nbsp;&nbsp;👉 ย้ายฝั่งเปลี่ยน <b>เส้นคั่น (หาร) เป็น คูณ</b> จะได้ตัวเลขตอนแรกคือ: {wrong_ans} × {x} = <b>{wrong_ans * x}</b><br>
-                        <b>ขั้นตอนที่ 2: คิดเลขให้ถูกต้อง</b><br>
-                        &nbsp;&nbsp;&nbsp;👉 นำตัวเลขตอนแรก ({wrong_ans * x}) ไป <b>คูณด้วย {x}</b> ตามโจทย์สั่ง: {wrong_ans * x} × {x} = <b>{correct_ans:,}</b><br>
+                        sol = f"""<span style='color: #2c3e50;'><b>วิธีคิดอย่างละเอียด (สมมติให้ 🔲 คือจำนวนตอนแรกสุด):</b><br>
+                        <b>ขั้นตอนที่ 1: สร้างสมการจากสิ่งที่ทำผิดพลาด (การเขียนเศษส่วนคือการหาร)</b><br>
+                        &nbsp;&nbsp;&nbsp;👉 {frac_wrong_s} = {wrong_ans}<br>
+                        <b>ขั้นตอนที่ 2: ใช้คุณสมบัติการเท่ากันเพื่อหาค่า 🔲</b><br>
+                        &nbsp;&nbsp;&nbsp;👉 ต้องการกำจัดตัวส่วน {x} จึง<b>นำ {x} มาคูณทั้งสองข้างของสมการ</b><br>
+                        &nbsp;&nbsp;&nbsp;👉 จะได้: ({frac_wrong_s}) <b>× {x}</b> = {wrong_ans} <b>× {x}</b><br>
+                        &nbsp;&nbsp;&nbsp;👉 ฝั่งซ้ายตัวส่วน {x} ตัดกันหมดไป, ฝั่งขวา {wrong_ans} × {x} = {wrong_ans * x}<br>
+                        &nbsp;&nbsp;&nbsp;👉 <b>สมการล่าสุด (จำนวนตอนแรก): 🔲 = {wrong_ans * x}</b><br>
+                        <b>ขั้นตอนที่ 3: คำนวณผลลัพธ์ที่ถูกต้อง</b><br>
+                        &nbsp;&nbsp;&nbsp;👉 ความตั้งใจแรกคือการนำไป <b>คูณด้วย {x}</b><br>
+                        &nbsp;&nbsp;&nbsp;👉 นำ {wrong_ans * x} × {x} = <b>{correct_ans:,}</b><br>
                         <b>ตอบ: {correct_ans:,}</b></span>"""
 
             # ---------------------------------------------------------
@@ -248,25 +259,26 @@ def generate_questions_logic(level, sub_t, num_q, is_challenge):
                     ans = total_rect - total_sq
                     
                     q = f"<b>{name}</b> วาดตารางเป็นรูปสี่เหลี่ยมผืนผ้าขนาด <b>{N} × {M}</b> ช่อง<br>จงหาว่ามี <b>'สี่เหลี่ยมผืนผ้าที่ไม่ใช่สี่เหลี่ยมจัตุรัส'</b> ซ่อนอยู่ทั้งหมดกี่รูป?"
-                    sol = f"""<span style='color: #2c3e50;'><b>วิธีทำอย่างละเอียด (วิเคราะห์แบบหักล้าง):</b><br>
-                    สูตรคือ: (สี่เหลี่ยมผืนผ้าทั้งหมด) - (สี่เหลี่ยมจัตุรัสทั้งหมด)<br>
-                    <b>ขั้นตอนที่ 1: หาจำนวนสี่เหลี่ยมรวมทุกชนิด (สูตรผืนผ้า)</b><br>
-                    &nbsp;&nbsp;&nbsp;👉 (ผลบวกด้านกว้าง) × (ผลบวกด้านยาว)<br>
-                    &nbsp;&nbsp;&nbsp;👉 (1+2+...+{N}) × (1+2+...+{M}) = {N*(N+1)//2} × {M*(M+1)//2} = <b>{total_rect:,} รูป</b><br>
-                    <b>ขั้นตอนที่ 2: หาจำนวนสี่เหลี่ยมจัตุรัสทั้งหมด</b><br>
-                    &nbsp;&nbsp;&nbsp;👉 นำด้านกว้างและยาวมาคูณกัน แล้วลดทีละ 1 นำมาบวกกัน<br>
-                    &nbsp;&nbsp;&nbsp;👉 ({N}×{M}) + ({N-1}×{M-1}) ... จนกว่าตัวใดตัวหนึ่งเป็น 1<br>
+                    sol = f"""<span style='color: #2c3e50;'><b>วิธีทำอย่างละเอียด (ใช้สมการหักล้างตัวแปร):</b><br>
+                    <b>สมการหลัก:</b> รูปที่ต้องการ = (สี่เหลี่ยมผืนผ้าทั้งหมด) - (สี่เหลี่ยมจัตุรัสทั้งหมด)<br>
+                    <b>ขั้นตอนที่ 1: หาตัวแปรสี่เหลี่ยมรวมทุกชนิด (ผืนผ้า)</b><br>
+                    &nbsp;&nbsp;&nbsp;👉 สมการกว้าง × ยาว: (1+2+...+{N}) × (1+2+...+{M})<br>
+                    &nbsp;&nbsp;&nbsp;👉 {N*(N+1)//2} × {M*(M+1)//2} = <b>{total_rect:,} รูป</b><br>
+                    <b>ขั้นตอนที่ 2: หาตัวแปรสี่เหลี่ยมจัตุรัสทั้งหมด</b><br>
+                    &nbsp;&nbsp;&nbsp;👉 สมการลดทอน: ({N}×{M}) + ({N-1}×{M-1}) ... จนกว่าจะเป็น 1<br>
                     &nbsp;&nbsp;&nbsp;👉 ผลรวมคือ <b>{total_sq:,} รูป</b><br>
-                    <b>ขั้นตอนที่ 3: หักล้างกัน</b><br>
-                    &nbsp;&nbsp;&nbsp;👉 {total_rect:,} - {total_sq:,} = <b>{ans:,} รูป</b><br>
+                    <b>ขั้นตอนที่ 3: แทนค่าในสมการหลัก</b><br>
+                    &nbsp;&nbsp;&nbsp;👉 🔲 = {total_rect:,} - {total_sq:,} = <b>{ans:,} รูป</b><br>
                     <b>ตอบ: {ans:,} รูป</b></span>"""
                 else:
                     grid = random.randint(2, 4) if is_p12 else random.randint(4, 6)
                     ans = sum([i*i for i in range(1, grid+1)])
                     q = f"<b>{name}</b> มีตารางกระดานขนาด <b>{grid} × {grid}</b> ช่อง จงหาว่ามี <b>'สี่เหลี่ยมจัตุรัส'</b> ซ่อนอยู่ทั้งหมดกี่รูป?"
-                    sol = f"""<span style='color: #2c3e50;'><b>วิธีทำอย่างละเอียด (สูตรลัดสี่เหลี่ยมจัตุรัส):</b><br>
-                    นำขนาดความยาวของตาราง มายกกำลังสองทีละตัว แล้วบวกกัน (1² + 2² + ... + {grid}²)<br>
-                    ผลรวม = 1 + 4 + ... + ({grid}×{grid}) = <b>{ans:,} รูป</b><br>
+                    sol = f"""<span style='color: #2c3e50;'><b>วิธีทำอย่างละเอียด (สร้างสมการผลรวม):</b><br>
+                    <b>ขั้นตอนที่ 1:</b> นำขนาดของตาราง (n) มาสร้างสมการยกกำลังสอง<br>
+                    &nbsp;&nbsp;&nbsp;👉 สมการ: 🔲 = 1² + 2² + ... + {grid}²<br>
+                    <b>ขั้นตอนที่ 2:</b> คิดค่าผลบวกในสมการ<br>
+                    &nbsp;&nbsp;&nbsp;👉 🔲 = 1 + 4 + ... + ({grid}×{grid}) = <b>{ans:,}</b><br>
                     <b>ตอบ: {ans:,} รูป</b></span>"""
 
             # ---------------------------------------------------------
@@ -296,39 +308,51 @@ def generate_questions_logic(level, sub_t, num_q, is_challenge):
                     
                     q = f"จงหาตัวเลขที่เติมลงในช่องว่าง:<br><br><span style='font-size:24px; font-weight:bold;'>{A} × &nbsp;<span style='font-size:36px; vertical-align: middle;'>[</span>&nbsp; {frac_html} &nbsp;−&nbsp; {D} &nbsp;<span style='font-size:36px; vertical-align: middle;'>]</span>&nbsp; =&nbsp; {E}</span>"
                     
-                    sol = f"""<span style='color: #2c3e50;'><b>วิธีคิดอย่างละเอียด (แกะกล่องของขวัญจากวงนอกเข้าสู่วงใน):</b><br>
-                    <b>ขั้นตอนที่ 1: กำจัดตัวเลขนอกวงเล็บใหญ่สุด คือ "× {A}"</b><br>
-                    &nbsp;&nbsp;&nbsp;👉 ย้ายไปฝั่งขวา เปลี่ยนเป็น <b>÷ {A}</b><br>
-                    &nbsp;&nbsp;&nbsp;👉 {E} ÷ {A} = <b>{V1}</b><br>
-                    <b>ขั้นตอนที่ 2: กำจัดตัวเลข "- {D}"</b><br>
-                    &nbsp;&nbsp;&nbsp;👉 ย้ายไปฝั่งขวา เปลี่ยนเป็น <b>+ {D}</b><br>
-                    &nbsp;&nbsp;&nbsp;👉 {V1} + {D} = <b>{V2}</b> (สมการเหลือ: {frac_sol_step} = {V2})<br>
-                    <b>ขั้นตอนที่ 3: กำจัดส่วน "{C}" (คือการหาร)</b><br>
-                    &nbsp;&nbsp;&nbsp;👉 ย้ายไปฝั่งขวา เปลี่ยนเป็น <b>× {C}</b><br>
-                    &nbsp;&nbsp;&nbsp;👉 {V2} × {C} = <b>{V3}</b><br>
+                    sol = f"""<span style='color: #2c3e50;'><b>วิธีคิดอย่างละเอียด (แก้สมการจากวงนอกเข้าสู่วงใน ด้วยคุณสมบัติการเท่ากัน):</b><br>
+                    <b>ขั้นตอนที่ 1: กำจัดตัวคูณ {A} นอกวงเล็บ</b><br>
+                    &nbsp;&nbsp;&nbsp;👉 นำ {A} มา<b>หารทั้งสองข้างของสมการ</b><br>
+                    &nbsp;&nbsp;&nbsp;👉 ฝั่งซ้าย {A} ตัด {A} หมดไป, ฝั่งขวา {E} ÷ {A} = {V1}<br>
+                    &nbsp;&nbsp;&nbsp;👉 <b>สมการล่าสุด:</b> {frac_sol_step} − {D} = {V1}<br>
+                    <b>ขั้นตอนที่ 2: กำจัดตัวลบ {D}</b><br>
+                    &nbsp;&nbsp;&nbsp;👉 นำ {D} มา<b>บวกเพิ่มทั้งสองข้างของสมการ</b><br>
+                    &nbsp;&nbsp;&nbsp;👉 ฝั่งซ้าย -{D} + {D} = 0, ฝั่งขวา {V1} + {D} = {V2}<br>
+                    &nbsp;&nbsp;&nbsp;👉 <b>สมการล่าสุด:</b> {frac_sol_step} = {V2}<br>
+                    <b>ขั้นตอนที่ 3: กำจัดตัวส่วน {C} (การหาร)</b><br>
+                    &nbsp;&nbsp;&nbsp;👉 นำ {C} มา<b>คูณทั้งสองข้างของสมการ</b><br>
+                    &nbsp;&nbsp;&nbsp;👉 ฝั่งซ้ายส่วน {C} ตัดกันหมดไป, ฝั่งขวา {V2} × {C} = {V3}<br>
+                    &nbsp;&nbsp;&nbsp;👉 <b>สมการล่าสุด:</b> 🔲 + {B} = {V3}<br>
                     <b>ขั้นตอนที่ 4: หาค่า 🔲</b><br>
-                    &nbsp;&nbsp;&nbsp;👉 เหลือ 🔲 + {B} = {V3} ➔ ย้ายไปลบ ➔ {V3} - {B} = <b>{ans}</b><br>
+                    &nbsp;&nbsp;&nbsp;👉 นำ {B} มา<b>ลบออกทั้งสองข้างของสมการ</b><br>
+                    &nbsp;&nbsp;&nbsp;👉 ฝั่งซ้ายเหลือ 🔲, ฝั่งขวา {V3} - {B} = {ans}<br>
+                    &nbsp;&nbsp;&nbsp;👉 <b>สมการล่าสุด: 🔲 = {ans}</b><br>
                     <b>ตอบ: {ans}</b></span>"""
                 else:
                     if is_p12:
                         a = random.randint(15, 50); b = random.randint(60, 150)
                         q = f"จงหาตัวเลขที่เติมลงในช่องว่าง:<br><br><span style='font-size:24px; font-weight:bold;'>{box_html} + {a} = {b}</span>"
-                        sol = f"""<span style='color: #2c3e50;'><b>วิธีคิดอย่างละเอียด (หลักการย้ายข้าง):</b><br>
-                        <b>ขั้นตอนที่ 1:</b> เราต้องย้าย <b>+ {a}</b> ไปอยู่ฝั่งขวาของเครื่องหมายเท่ากับ ( = )<br>
-                        <b>ขั้นตอนที่ 2:</b> เวลาย้ายฝั่ง ต้องเปลี่ยนเครื่องหมายเป็น <b>ตรงกันข้าม</b> (จากบวกเป็นลบ)<br>
-                        &nbsp;&nbsp;&nbsp;👉 สมการใหม่คือ: 🔲 = {b} - {a}<br>
-                        &nbsp;&nbsp;&nbsp;👉 คิดเลข: {b} - {a} = <b>{b-a}</b><br>
+                        sol = f"""<span style='color: #2c3e50;'><b>วิธีคิดอย่างละเอียด (ใช้คุณสมบัติการเท่ากันของสมการ):</b><br>
+                        <b>ขั้นตอนที่ 1:</b> จากสมการ 🔲 + {a} = {b}<br>
+                        &nbsp;&nbsp;&nbsp;👉 ต้องการให้ 🔲 เหลือเพียงตัวเดียว จึงใช้คุณสมบัติการเท่ากัน โดย<b>นำ {a} มาลบออกทั้งสองข้างของสมการ</b><br>
+                        &nbsp;&nbsp;&nbsp;👉 เขียนเป็นสมการได้ว่า: 🔲 + {a} <b>- {a}</b> = {b} <b>- {a}</b><br>
+                        <b>ขั้นตอนที่ 2:</b> คำนวณผลลัพธ์แต่ละข้าง<br>
+                        &nbsp;&nbsp;&nbsp;👉 ฝั่งซ้าย: {a} - {a} = 0 (เหลือ 🔲 ตัวเดียว)<br>
+                        &nbsp;&nbsp;&nbsp;👉 ฝั่งขวา: {b} - {a} = {b-a}<br>
+                        &nbsp;&nbsp;&nbsp;👉 <b>สมการล่าสุด: 🔲 = {b-a}</b><br>
                         <b>ตอบ: {b-a}</b></span>"""
                     else:
                         a = random.randint(10, 50); b = random.randint(2, 9)
                         ans = random.randint(5, 40)
                         c = (ans + a) * b
                         q = f"จงหาตัวเลขที่เติมลงในช่องว่าง:<br><br><span style='font-size:24px; font-weight:bold;'>( {box_html} + {a} ) × {b} = {c}</span>"
-                        sol = f"""<span style='color: #2c3e50;'><b>วิธีคิดอย่างละเอียด (ย้ายข้างทีละตัว):</b><br>
-                        <b>ขั้นตอนที่ 1: กำจัดตัวนอกวงเล็บ "× {b}"</b> ย้ายไปเปลี่ยนเป็น <b>÷ {b}</b><br>
-                        &nbsp;&nbsp;&nbsp;👉 จะได้: {c} ÷ {b} = <b>{c//b}</b> (สมการเหลือ: 🔲 + {a} = {c//b})<br>
-                        <b>ขั้นตอนที่ 2: หาค่า 🔲</b> ย้าย <b>+ {a}</b> ข้ามฝั่งไป <b>- {a}</b><br>
-                        &nbsp;&nbsp;&nbsp;👉 จะได้: {c//b} - {a} = <b>{ans}</b><br>
+                        sol = f"""<span style='color: #2c3e50;'><b>วิธีคิดอย่างละเอียด (กำจัดตัวแปรด้วยคุณสมบัติการเท่ากัน):</b><br>
+                        <b>ขั้นตอนที่ 1: กำจัดตัวนอกวงเล็บ "× {b}"</b><br>
+                        &nbsp;&nbsp;&nbsp;👉 <b>นำ {b} มาหารทั้งสองข้างของสมการ</b><br>
+                        &nbsp;&nbsp;&nbsp;👉 ฝั่งซ้าย {b} ตัด {b} หมดไป, ฝั่งขวา {c} ÷ {b} = {c//b}<br>
+                        &nbsp;&nbsp;&nbsp;👉 <b>สมการล่าสุด:</b> 🔲 + {a} = {c//b}<br>
+                        <b>ขั้นตอนที่ 2: หาค่า 🔲</b><br>
+                        &nbsp;&nbsp;&nbsp;👉 <b>นำ {a} มาลบออกทั้งสองข้างของสมการ</b><br>
+                        &nbsp;&nbsp;&nbsp;👉 ฝั่งซ้ายเหลือ 🔲, ฝั่งขวา {c//b} - {a} = {ans}<br>
+                        &nbsp;&nbsp;&nbsp;👉 <b>สมการล่าสุด: 🔲 = {ans}</b><br>
                         <b>ตอบ: {ans}</b></span>"""
 
             # ---------------------------------------------------------
@@ -348,22 +372,25 @@ def generate_questions_logic(level, sub_t, num_q, is_challenge):
                     frac_M = get_vertical_fraction(box_html, B)
                     frac_R = get_vertical_fraction(D, B*C)
                     
-                    frac_sol_M = get_vertical_fraction("🔲", B, color="#2c3e50", is_bold=False)
                     frac_sol_M1 = get_vertical_fraction(f"🔲 × {C}", f"{B} × {C}", color="#2c3e50", is_bold=False)
                     frac_sol_M2 = get_vertical_fraction(f"🔲 × {C}", B*C, color="#2c3e50", is_bold=False)
                     
                     q = f"จงหา <b>'ผลบวกของจำนวนนับทุกจำนวน'</b> ที่สามารถเติมในช่องว่างแล้วทำให้อสมการเป็นจริง:<br><br><span style='font-size:24px; font-weight:bold;'>{frac_L} &nbsp;&lt;&nbsp; {frac_M} &nbsp;&lt;&nbsp; {frac_R}</span>"
-                    sol = f"""<span style='color: #2c3e50;'><b>วิธีคิดวิเคราะห์ (อสมการเศษส่วน):</b><br>
-                    การจะเปรียบเทียบเศษส่วนได้ "ตัวส่วนด้านล่างต้องเท่ากัน" ทั้งหมดก่อนครับ!<br>
-                    <b>ขั้นตอนที่ 1: ทำตัวส่วนให้เท่ากัน</b><br>
-                    &nbsp;&nbsp;&nbsp;👉 เศษส่วนตรงกลางคือ {frac_sol_M} แต่ด้านข้างมีส่วนเป็น {B*C} ดังนั้นเราต้องนำ {C} มาคูณทั้งเศษและส่วนให้ตัวตรงกลาง<br>
-                    &nbsp;&nbsp;&nbsp;👉 ตรงกลางจะกลายเป็น: {frac_sol_M1} = {frac_sol_M2}<br>
-                    <b>ขั้นตอนที่ 2: เปรียบเทียบเฉพาะตัวเศษด้านบน</b><br>
-                    &nbsp;&nbsp;&nbsp;👉 ตอนนี้ส่วนเป็น {B*C} เท่ากันหมดแล้ว เราสามารถนำเฉพาะตัวเศษด้านบนมาเทียบกันได้เลย อสมการจะกลายเป็น: <b>{A} &lt; 🔲 × {C} &lt; {D}</b><br>
-                    <b>ขั้นตอนที่ 3: หาจำนวนนับ 🔲 ที่เป็นไปได้ทั้งหมด</b><br>
-                    &nbsp;&nbsp;&nbsp;👉 เราต้องหาว่ามีเลขอะไรบ้างที่คูณ {C} แล้วได้ผลลัพธ์อยู่ระหว่าง {A} ถึง {D}<br>
-                    &nbsp;&nbsp;&nbsp;👉 ลองท่องสูตรคูณแม่ {C} จะพบว่าจำนวนนับที่ใช้ได้คือ: <b>{', '.join(map(str, ans_list))}</b><br>
-                    &nbsp;&nbsp;&nbsp;👉 ผลบวกของทุกจำนวน = {' + '.join(map(str, ans_list))} = <b>{ans}</b><br>
+                    sol = f"""<span style='color: #2c3e50;'><b>วิธีคิดวิเคราะห์อย่างละเอียด (แก้อสมการเศษส่วน):</b><br>
+                    จากโจทย์: <b>{frac_L} &nbsp;&lt;&nbsp; {get_vertical_fraction('🔲', B, color='#2c3e50', is_bold=False)} &nbsp;&lt;&nbsp; {frac_R}</b><br>
+                    <b>ขั้นตอนที่ 1: ทำให้ตัวส่วนตรงกลางเท่ากับตัวส่วนด้านข้าง ({B*C})</b><br>
+                    &nbsp;&nbsp;&nbsp;👉 นำ <b>{C} มาคูณทั้งตัวเศษและตัวส่วน</b> ของพจน์ตรงกลาง<br>
+                    &nbsp;&nbsp;&nbsp;👉 พจน์กลางจะเปลี่ยนเป็น: {frac_sol_M1} = {frac_sol_M2}<br>
+                    &nbsp;&nbsp;&nbsp;👉 <b>อสมการล่าสุด:</b> {frac_L} &lt; {frac_sol_M2} &lt; {frac_R}<br>
+                    <b>ขั้นตอนที่ 2: กำจัดตัวส่วน {B*C} โดยใช้คุณสมบัติการคูณ</b><br>
+                    &nbsp;&nbsp;&nbsp;👉 นำ <b>{B*C} มาคูณตลอดทั้งอสมการ (คูณทุกพจน์)</b><br>
+                    &nbsp;&nbsp;&nbsp;👉 ทุกพจน์จะถูกตัดตัวส่วนทิ้งไปทั้งหมด<br>
+                    &nbsp;&nbsp;&nbsp;👉 <b>อสมการล่าสุด: {A} &lt; 🔲 × {C} &lt; {D}</b><br>
+                    <b>ขั้นตอนที่ 3: หาค่า 🔲 ที่เป็นจำนวนนับ</b><br>
+                    &nbsp;&nbsp;&nbsp;👉 หาว่า 🔲 เป็นเลขอะไรได้บ้าง ที่เมื่อคูณ {C} แล้วได้ผลลัพธ์มากกว่า {A} แต่น้อยกว่า {D}<br>
+                    &nbsp;&nbsp;&nbsp;👉 จากสูตรคูณแม่ {C} จะพบว่าจำนวนที่สอดคล้องคือ: <b>{', '.join(map(str, ans_list))}</b><br>
+                    <b>ขั้นตอนที่ 4: หาผลบวกของทุกจำนวน</b><br>
+                    &nbsp;&nbsp;&nbsp;👉 ผลบวกสมการ = {' + '.join(map(str, ans_list))} = <b>{ans}</b><br>
                     <b>ตอบ: {ans}</b></span>"""
                 else:
                     if is_p12:
@@ -373,11 +400,17 @@ def generate_questions_logic(level, sub_t, num_q, is_challenge):
                         
                     max_val = limit_val - a - 1
                     q = f"จงหา <b>จำนวนนับที่มากที่สุด</b> ที่เติมในช่องว่าง:<br><br><span style='font-size:24px; font-weight:bold;'>{box_html} + {a} &lt; {limit_val}</span>"
-                    sol = f"""<span style='color: #2c3e50;'><b>วิธีคิดอย่างละเอียด:</b><br>
-                    <b>ขั้นตอนที่ 1:</b> คิดเสมือนว่ามันคือเครื่องหมาย "เท่ากับ" ก่อน ➔ 🔲 + {a} = {limit_val}<br>
-                    &nbsp;&nbsp;&nbsp;👉 ย้ายข้างไปลบ จะได้ 🔲 = {limit_val} - {a} = <b>{limit_val - a}</b><br>
-                    <b>ขั้นตอนที่ 2:</b> กลับสู่ความจริง โจทย์บอก <b>น้อยกว่า ( &lt; )</b> {limit_val}<br>
-                    &nbsp;&nbsp;&nbsp;👉 ดังนั้นจำนวนที่มากที่สุดที่เป็นไปได้คือ {limit_val - a} - 1 = <b>{max_val}</b><br>
+                    sol = f"""<span style='color: #2c3e50;'><b>วิธีคิดอย่างละเอียด (ใช้คุณสมบัติของอสมการ):</b><br>
+                    <b>ขั้นตอนที่ 1:</b> จากอสมการ 🔲 + {a} &lt; {limit_val}<br>
+                    &nbsp;&nbsp;&nbsp;👉 เราต้องการหาค่า 🔲 จึงต้องกำจัด +{a} โดย<b>นำ {a} มาลบออกทั้งสองข้างของอสมการ</b><br>
+                    &nbsp;&nbsp;&nbsp;👉 เขียนเป็นอสมการใหม่ได้ว่า: 🔲 + {a} <b>- {a}</b> &lt; {limit_val} <b>- {a}</b><br>
+                    <b>ขั้นตอนที่ 2:</b> คำนวณผลลัพธ์ทั้งสองข้าง<br>
+                    &nbsp;&nbsp;&nbsp;👉 ฝั่งซ้าย: {a} - {a} = 0 (เหลือ 🔲)<br>
+                    &nbsp;&nbsp;&nbsp;👉 ฝั่งขวา: {limit_val} - {a} = {limit_val - a}<br>
+                    &nbsp;&nbsp;&nbsp;👉 <b>อสมการล่าสุดคือ: 🔲 &lt; {limit_val - a}</b><br>
+                    <b>ขั้นตอนที่ 3: หาจำนวนนับที่มากที่สุด</b><br>
+                    &nbsp;&nbsp;&nbsp;👉 อสมการบอกว่า 🔲 ต้อง "น้อยกว่า" {limit_val - a} (เป็น {limit_val - a} ไม่ได้)<br>
+                    &nbsp;&nbsp;&nbsp;👉 ดังนั้น จำนวนนับที่มากที่สุดที่เป็นไปได้คือ {limit_val - a} - 1 = <b>{max_val}</b><br>
                     <b>ตอบ: {max_val}</b></span>"""
 
             # ---------------------------------------------------------
@@ -401,14 +434,23 @@ def generate_questions_logic(level, sub_t, num_q, is_challenge):
                     math_table = get_vertical_math(top_row, bot_row, res_row, operator="−")
                     
                     q = f"จงวิเคราะห์การตั้งลบแบบมีการยืมข้ามหลักต่อไปนี้ แล้วหาว่าตัวเลขที่ซ่อนอยู่ใน 🔲 จาก <b>บนลงล่าง</b> คือเลขใดตามลำดับ?<br>{math_table}"
-                    sol = f"""<span style='color: #2c3e50;'><b>วิธีคิดวิเคราะห์ (แกะรอยการลบและการยืมทีละหลัก):</b><br>
-                    <b>หลักหน่วย:</b> {Z} - {C} ตัวตั้งน้อยกว่าตัวลบ จึงต้อง <b>'ยืม'</b> หลักสิบมา 10<br>
-                    &nbsp;&nbsp;&nbsp;👉 กลายเป็น (10 + {Z}) - {C} = <b>{10+Z-C}</b> ➔ 🔲 ล่างสุดคือ <b>{10+Z-C}</b><br>
-                    <b>หลักสิบ:</b> เลข {Y} ถูกยืมไป 1 จึงเหลือ {Y-1} แต่ยังต้องลบกับ 🔲 แล้วได้ {str_Res[1]}<br>
-                    &nbsp;&nbsp;&nbsp;👉 ตัวตั้งเหลือน้อยกว่าแน่ๆ จึงต้อง <b>'ยืม'</b> หลักร้อยมาอีก 10 กลายเป็น (10 + {Y-1})<br>
-                    &nbsp;&nbsp;&nbsp;👉 สมการคือ: {10+Y-1} - 🔲 = {str_Res[1]} ➔ ย้ายข้าง: {10+Y-1} - {str_Res[1]} = <b>{B}</b> ➔ 🔲 ตรงกลางคือ <b>{B}</b><br>
-                    <b>หลักร้อย:</b> 🔲 ถูกหลักสิบยืมไป 1 จึงมีค่าลดลง 1<br>
-                    &nbsp;&nbsp;&nbsp;👉 สมการคือ: (🔲 - 1) - {A} = {str_Res[0]} ➔ ย้ายข้างหาค่า 🔲 = {int(str_Res[0])} + {A} + 1 = <b>{X}</b> ➔ 🔲 บนสุดคือ <b>{X}</b><br>
+                    sol = f"""<span style='color: #2c3e50;'><b>วิธีคิดอย่างละเอียด (วิเคราะห์การลบทีละหลักและเขียนเป็นสมการ):</b><br>
+                    <b>ขั้นตอนที่ 1: วิเคราะห์หลักหน่วย</b><br>
+                    &nbsp;&nbsp;&nbsp;👉 ตัวตั้ง {Z} ลบ {C} ซึ่ง {Z} < {C} ลบไม่ได้ จึงยืมหลักสิบมา 10<br>
+                    &nbsp;&nbsp;&nbsp;👉 หลักหน่วยกลายเป็น {Z} + 10 = {10+Z}<br>
+                    &nbsp;&nbsp;&nbsp;👉 สร้างสมการ: {10+Z} - {C} = 🔲 (กล่องล่างสุด)<br>
+                    &nbsp;&nbsp;&nbsp;👉 <b>สมการล่าสุด: 🔲 ล่างสุด = {10+Z-C}</b><br>
+                    <b>ขั้นตอนที่ 2: วิเคราะห์หลักสิบ</b><br>
+                    &nbsp;&nbsp;&nbsp;👉 ตัวตั้ง {Y} ถูกยืมไป 1 เหลือ {Y-1} แต่ต้องลบ 🔲 ให้ได้ {str_Res[1]}<br>
+                    &nbsp;&nbsp;&nbsp;👉 {Y-1} น้อยกว่า {str_Res[1]} จึงยืมหลักร้อยมา 10 กลายเป็น {10+Y-1}<br>
+                    &nbsp;&nbsp;&nbsp;👉 สร้างสมการ: {10+Y-1} - 🔲 = {str_Res[1]}<br>
+                    &nbsp;&nbsp;&nbsp;👉 <b>นำ 🔲 บวกทั้งสองข้าง และนำ {str_Res[1]} ลบทั้งสองข้าง</b><br>
+                    &nbsp;&nbsp;&nbsp;👉 <b>สมการล่าสุด: 🔲 ตรงกลาง = {10+Y-1} - {str_Res[1]} = {B}</b><br>
+                    <b>ขั้นตอนที่ 3: วิเคราะห์หลักร้อย</b><br>
+                    &nbsp;&nbsp;&nbsp;👉 ตัวตั้ง 🔲 (บนสุด) ถูกหลักสิบยืมไป 1 จึงเหลือ (🔲 - 1)<br>
+                    &nbsp;&nbsp;&nbsp;👉 สร้างสมการ: (🔲 - 1) - {A} = {str_Res[0]}<br>
+                    &nbsp;&nbsp;&nbsp;👉 <b>นำ {A} และ 1 บวกเพิ่มทั้งสองข้างของสมการ</b><br>
+                    &nbsp;&nbsp;&nbsp;👉 <b>สมการล่าสุด: 🔲 บนสุด = {str_Res[0]} + {A} + 1 = {X}</b><br>
                     <b>ตอบ: บนคือ {X}, กลางคือ {B}, ล่างคือ {10+Z-C}</b></span>"""
                 else:
                     if is_p12:
@@ -418,11 +460,17 @@ def generate_questions_logic(level, sub_t, num_q, is_challenge):
                         top_row, bot_row, res_row = [str_a[0], box_html], [box_html, str_b[1]], list(str_ans)
                         math_table = get_vertical_math(top_row, bot_row, res_row, operator="+")
                         q = f"จงเติมตัวเลขลงใน 🔲 ให้ถูกต้องสมบูรณ์<br>{math_table}"
-                        sol = f"""<span style='color: #2c3e50;'><b>วิธีคิดอย่างละเอียด (เจาะทีละหลัก):</b><br>
-                        <b>หลักหน่วย (ขวาสุด):</b> 🔲 + {str_b[1]} = {str_ans[1]}<br>
-                        &nbsp;&nbsp;&nbsp;👉 คิดย้อนกลับ: {str_ans[1]} - {str_b[1]} = <b>{str_a[1]}</b> (นี่คือตัวเลขกล่องบน)<br>
-                        <b>หลักสิบ (ซ้ายสุด):</b> {str_a[0]} + 🔲 = {str_ans[0]}<br>
-                        &nbsp;&nbsp;&nbsp;👉 คิดย้อนกลับ: {str_ans[0]} - {str_a[0]} = <b>{str_b[0]}</b> (นี่คือตัวเลขกล่องล่าง)<br>
+                        sol = f"""<span style='color: #2c3e50;'><b>วิธีคิดอย่างละเอียด (วิเคราะห์เป็นสมการทีละหลัก):</b><br>
+                        <b>ขั้นตอนที่ 1: วิเคราะห์หลักหน่วย</b><br>
+                        &nbsp;&nbsp;&nbsp;👉 สร้างสมการ: 🔲 (บน) + {str_b[1]} = {str_ans[1]}<br>
+                        &nbsp;&nbsp;&nbsp;👉 <b>นำ {str_b[1]} มาลบออกทั้งสองข้างของสมการ</b><br>
+                        &nbsp;&nbsp;&nbsp;👉 จะได้: 🔲 (บน) + {str_b[1]} <b>- {str_b[1]}</b> = {str_ans[1]} <b>- {str_b[1]}</b><br>
+                        &nbsp;&nbsp;&nbsp;👉 <b>สมการล่าสุด: 🔲 (บน) = {str_a[1]}</b><br>
+                        <b>ขั้นตอนที่ 2: วิเคราะห์หลักสิบ</b><br>
+                        &nbsp;&nbsp;&nbsp;👉 สร้างสมการ: {str_a[0]} + 🔲 (ล่าง) = {str_ans[0]}<br>
+                        &nbsp;&nbsp;&nbsp;👉 <b>นำ {str_a[0]} มาลบออกทั้งสองข้างของสมการ</b><br>
+                        &nbsp;&nbsp;&nbsp;👉 จะได้: {str_a[0]} <b>- {str_a[0]}</b> + 🔲 (ล่าง) = {str_ans[0]} <b>- {str_a[0]}</b><br>
+                        &nbsp;&nbsp;&nbsp;👉 <b>สมการล่าสุด: 🔲 (ล่าง) = {str_b[0]}</b><br>
                         <b>ตอบ: กล่องบนคือ {str_a[1]}, กล่องล่างคือ {str_b[0]}</b></span>"""
                     else:
                         n2 = random.randint(2, 9)
@@ -435,10 +483,17 @@ def generate_questions_logic(level, sub_t, num_q, is_challenge):
                         math_table = get_vertical_math(top_row, bot_row, res_row, operator="×")
                         
                         q = f"จงเติมตัวเลขลงใน 🔲 ให้การคูณนี้ถูกต้อง<br>{math_table}"
-                        sol = f"""<span style='color: #2c3e50;'><b>วิธีคิดอย่างละเอียด:</b><br>
-                        จากโจทย์คือ ตัวตั้ง 2 หลัก × {n2} = {ans_val}<br>
-                        ย้ายข้างการคูณไปเป็นหาร: จำนวนสองหลักคือ {ans_val} ÷ {n2} = <b>{n1}</b><br>
-                        ดังนั้นตัวเลขที่หายไปในช่องว่างด้านบนคือ <b>{str_n1[1]}</b><br>
+                        sol = f"""<span style='color: #2c3e50;'><b>วิธีคิดอย่างละเอียด (เขียนรูปประโยคเป็นสมการ):</b><br>
+                        <b>ขั้นตอนที่ 1: สร้างสมการหลักจากการคูณ</b><br>
+                        &nbsp;&nbsp;&nbsp;👉 ให้ตัวเลข 2 หลักด้านบนคือ "จำนวนปริศนา"<br>
+                        &nbsp;&nbsp;&nbsp;👉 สมการคือ: จำนวนปริศนา × {n2} = {ans_val}<br>
+                        <b>ขั้นตอนที่ 2: หาจำนวนปริศนาด้วยคุณสมบัติการเท่ากัน</b><br>
+                        &nbsp;&nbsp;&nbsp;👉 ต้องการกำจัด × {n2} จึง<b>นำ {n2} มาหารทั้งสองข้างของสมการ</b><br>
+                        &nbsp;&nbsp;&nbsp;👉 จะได้: (จำนวนปริศนา × {n2}) <b>÷ {n2}</b> = {ans_val} <b>÷ {n2}</b><br>
+                        &nbsp;&nbsp;&nbsp;👉 <b>สมการล่าสุด: จำนวนปริศนา = {n1}</b><br>
+                        <b>ขั้นตอนที่ 3: หาตัวเลขที่หายไปในช่องว่าง</b><br>
+                        &nbsp;&nbsp;&nbsp;👉 เนื่องจากจำนวนด้านบนคือ {n1} และโจทย์ให้หลักสิบมาคือ {str_n1[0]}<br>
+                        &nbsp;&nbsp;&nbsp;👉 <b>สมการล่าสุด: 🔲 หลักหน่วย = {str_n1[1]}</b><br>
                         <b>ตอบ: {str_n1[1]}</b></span>"""
 
             # ---------------------------------------------------------
@@ -453,31 +508,49 @@ def generate_questions_logic(level, sub_t, num_q, is_challenge):
                     ans = 2 * (width + S)
                     
                     q = f"<b>{name}</b> นำกระดาษรูปสี่เหลี่ยมจัตุรัสที่มีความยาวด้านละ <b>{S} ซม.</b> จำนวน <b>{N} แผ่น</b> มาวางเรียงต่อกันเป็นแนวยาว<br>โดยให้แต่ละแผ่นวางซ้อนทับกันเป็นระยะ <b>{O} ซม.</b><br>จงหาความยาวรอบรูปทั้งหมดของรูปทรงที่เกิดใหม่นี้?"
-                    sol = f"""<span style='color: #2c3e50;'><b>วิธีคิดวิเคราะห์ (ความยาวที่ถูกซ่อน):</b><br>
+                    sol = f"""<span style='color: #2c3e50;'><b>วิธีคิดวิเคราะห์ (สมการความยาวที่ถูกซ่อน):</b><br>
                     เมื่อวางซ้อนทับกัน รูปทรงใหม่จะกลายเป็นสี่เหลี่ยมผืนผ้ายาวๆ 1 รูป<br>
-                    <b>ขั้นตอนที่ 1: หาความยาว (แนวนอน) ของรูปใหม่</b><br>
+                    <b>ขั้นตอนที่ 1: สร้างสมการความยาว (แนวนอน) ของรูปใหม่</b><br>
                     &nbsp;&nbsp;&nbsp;👉 ถ้านำแผ่นมาต่อกันเฉยๆ จะยาว {N} × {S} = {N*S} ซม.<br>
                     &nbsp;&nbsp;&nbsp;👉 แต่มีรอยซ้อนทับ {N-1} รอย รอยละ {O} ซม. ➔ หดหายไป {N-1} × {O} = {(N-1)*O} ซม.<br>
-                    &nbsp;&nbsp;&nbsp;👉 ความยาวจริง = {N*S} - {(N-1)*O} = <b>{width} ซม.</b><br>
-                    <b>ขั้นตอนที่ 2: หาความกว้าง (แนวตั้ง)</b><br>
-                    &nbsp;&nbsp;&nbsp;👉 ความกว้างยังคงเท่าเดิมคือด้านของจัตุรัส = <b>{S} ซม.</b><br>
-                    <b>ขั้นตอนที่ 3: หาความยาวรอบรูปทั้งหมด</b><br>
-                    &nbsp;&nbsp;&nbsp;👉 2 × (กว้าง + ยาว) = 2 × ({width} + {S}) = <b>{ans} ซม.</b><br>
+                    &nbsp;&nbsp;&nbsp;👉 <b>สมการล่าสุด: ความยาว = {N*S} - {(N-1)*O} = {width} ซม.</b><br>
+                    <b>ขั้นตอนที่ 2: ระบุความกว้าง (แนวตั้ง)</b><br>
+                    &nbsp;&nbsp;&nbsp;👉 ความกว้างยังคงเท่าเดิมคือด้านของจัตุรัส ➔ <b>สมการล่าสุด: ความกว้าง = {S} ซม.</b><br>
+                    <b>ขั้นตอนที่ 3: แทนค่าในสมการหาความยาวรอบรูป</b><br>
+                    &nbsp;&nbsp;&nbsp;👉 สมการรอบรูป = 2 × (กว้าง + ยาว)<br>
+                    &nbsp;&nbsp;&nbsp;👉 แทนค่า: 2 × ({width} + {S}) = <b>{ans} ซม.</b><br>
                     <b>ตอบ: {ans} ซม.</b></span>"""
                 else:
                     if is_p12: 
                         L = random.randint(4, 20) * 4
                         q = f"<b>{name}</b> มีลวดความยาว <b>{L} ซม.</b> นำไปดัดเป็นรูปสี่เหลี่ยมจัตุรัส จะมีความยาวด้านละกี่เซนติเมตร?"
-                        sol = f"<span style='color: #2c3e50;'>จัตุรัสมี 4 ด้านที่เท่ากัน ➔ นำความยาวลวดทั้งหมดไปแบ่ง 4 ส่วน: {L} ÷ 4 = <b>{L//4} ซม.</b></span>"
+                        sol = f"""<span style='color: #2c3e50;'><b>วิธีคิดอย่างละเอียด (ตั้งเป็นสมการ):</b><br>
+                        <b>ขั้นตอนที่ 1: สร้างสมการจากคุณสมบัติของสี่เหลี่ยมจัตุรัส</b><br>
+                        &nbsp;&nbsp;&nbsp;👉 จัตุรัสมี 4 ด้านเท่ากัน สมมติให้ด้านยาว = 🔲<br>
+                        &nbsp;&nbsp;&nbsp;👉 <b>สมการ: 4 × 🔲 = {L}</b><br>
+                        <b>ขั้นตอนที่ 2: ใช้คุณสมบัติการเท่ากันหาค่า 🔲</b><br>
+                        &nbsp;&nbsp;&nbsp;👉 <b>นำ 4 มาหารทั้งสองข้างของสมการ</b><br>
+                        &nbsp;&nbsp;&nbsp;👉 (4 × 🔲) ÷ 4 = {L} ÷ 4<br>
+                        &nbsp;&nbsp;&nbsp;👉 <b>สมการล่าสุด: 🔲 = {L//4} ซม.</b><br>
+                        <b>ตอบ: {L//4} ซม.</b></span>"""
                     else:
                         side = random.randint(5, 25)
                         leftover = random.randint(5, 20)
                         L = (side * 4) + leftover
                         q = f"<b>{name}</b> นำเส้นลวดที่มีความยาว <b>{L} ซม.</b> ไปสร้างรูปสี่เหลี่ยมจัตุรัสแล้ว <b>เหลือเศษลวด {leftover} ซม.</b><br>ความยาวของแต่ละด้านของรูปสี่เหลี่ยมจัตุรัสนี้เป็นกี่เซนติเมตร?"
-                        sol = f"""<span style='color: #2c3e50;'><b>วิธีคิด:</b><br>
-                        <b>ขั้นตอนที่ 1:</b> หาลวดที่ถูกใช้จริง นำลวดทั้งหมดหักส่วนที่เหลือทิ้ง: {L} - {leftover} = <b>{L - leftover} ซม.</b><br>
-                        <b>ขั้นตอนที่ 2:</b> ลวด {L - leftover} ซม. ถูกดัดเป็นจัตุรัส (4 ด้านเท่ากัน) ➔ นำไปหาร 4<br>
-                        &nbsp;&nbsp;&nbsp;👉 {L - leftover} ÷ 4 = <b>{side} ซม.</b><br>
+                        sol = f"""<span style='color: #2c3e50;'><b>วิธีคิดอย่างละเอียด (ตั้งสมการและคุณสมบัติการเท่ากัน):</b><br>
+                        <b>ขั้นตอนที่ 1: สร้างสมการจากโจทย์</b><br>
+                        &nbsp;&nbsp;&nbsp;👉 สมมติให้ความยาวด้านของจัตุรัส = 🔲<br>
+                        &nbsp;&nbsp;&nbsp;👉 ลวดทั้งหมด = ลวดที่ใช้ทำ 4 ด้าน + ลวดที่เหลือ<br>
+                        &nbsp;&nbsp;&nbsp;👉 <b>สมการ: (4 × 🔲) + {leftover} = {L}</b><br>
+                        <b>ขั้นตอนที่ 2: ใช้คุณสมบัติการเท่ากันกำจัดเศษลวด</b><br>
+                        &nbsp;&nbsp;&nbsp;👉 <b>นำ {leftover} มาลบออกทั้งสองข้างของสมการ</b><br>
+                        &nbsp;&nbsp;&nbsp;👉 (4 × 🔲) + {leftover} - {leftover} = {L} - {leftover}<br>
+                        &nbsp;&nbsp;&nbsp;👉 <b>สมการล่าสุด: 4 × 🔲 = {L - leftover}</b><br>
+                        <b>ขั้นตอนที่ 3: ใช้คุณสมบัติการเท่ากันหาความยาวด้าน</b><br>
+                        &nbsp;&nbsp;&nbsp;👉 <b>นำ 4 มาหารทั้งสองข้างของสมการ</b><br>
+                        &nbsp;&nbsp;&nbsp;👉 (4 × 🔲) ÷ 4 = {L - leftover} ÷ 4<br>
+                        &nbsp;&nbsp;&nbsp;👉 <b>สมการล่าสุด: 🔲 = {side}</b><br>
                         <b>ตอบ: {side} ซม.</b></span>"""
 
             # ---------------------------------------------------------
@@ -503,18 +576,18 @@ def generate_questions_logic(level, sub_t, num_q, is_challenge):
                     f3_4_s = get_vertical_fraction(3, 4, color="#2c3e50", is_bold=False)
                     
                     q = f"อคิณอ่านหนังสือเล่มหนึ่ง <b>วันแรกอ่านไป {f1_4} ของเล่ม</b><br><b>วันที่สองอ่านไป {f1_3} ของหน้าที่เหลือ</b> และอ่านเพิ่มอีก <b>{X} หน้า</b><br><b>วันที่สามอ่านไป {f1_2} ของหน้าที่เหลือ</b> และอ่านเพิ่มอีก <b>{Y} หน้า</b> ปรากฏว่าอ่านจบเล่มพอดี!<br>จงหาว่าหนังสือเล่มนี้มีทั้งหมดกี่หน้า?"
-                    sol = f"""<span style='color: #2c3e50;'><b>วิธีคิดย้อนกลับ (Olympiad Level):</b><br>
-                    เมื่อมีคำว่า "ของหน้าที่เหลือ" ซ้อนกัน ให้คิดย้อนจากวันสุดท้ายกลับมาวันแรกครับ!<br>
-                    <b>วันที่ 3:</b> อ่านครึ่งหนึ่ง ({f1_2_s}) แล้วอ่านอีก {Y} หน้าจนจบเล่ม<br>
-                    &nbsp;&nbsp;&nbsp;👉 แสดงว่า {Y} หน้าที่อ่านตอนท้าย ก็คือ "ครึ่งหนึ่ง" ที่เหลืออยู่นั่นเอง<br>
-                    &nbsp;&nbsp;&nbsp;👉 จำนวนหน้าก่อนอ่านวันที่ 3 = {Y} × 2 = <b>{R2} หน้า</b><br>
-                    <b>วันที่ 2:</b> อ่าน {f1_3_s} และอ่านเพิ่มอีก {X} หน้า ทำให้เหลือ {R2} หน้า<br>
-                    &nbsp;&nbsp;&nbsp;👉 นำ {X} ไปคืนกลับ: {R2} + {X} = {R2+X} หน้า<br>
-                    &nbsp;&nbsp;&nbsp;👉 ซึ่ง {R2+X} หน้า คิดเป็น {f2_3_s} ของวันนั้น (เพราะอ่านไป {f1_3_s})<br>
-                    &nbsp;&nbsp;&nbsp;👉 จำนวนหน้าก่อนอ่านวันที่ 2 = ({R2+X} ÷ 2) × 3 = <b>{R1} หน้า</b><br>
+                    sol = f"""<span style='color: #2c3e50;'><b>วิธีคิดย้อนกลับและตั้งสมการทีละขั้น (Olympiad Level):</b><br>
+                    <b>วันที่ 3:</b> อ่าน {f1_2_s} แล้วอ่านอีก {Y} หน้าจนจบ<br>
+                    &nbsp;&nbsp;&nbsp;👉 ตั้งสมการ: 🔲/2 = {Y} (เพราะครึ่งหลังคือที่เหลือ)<br>
+                    &nbsp;&nbsp;&nbsp;👉 นำ 2 คูณทั้งสองข้าง ➔ <b>สมการล่าสุด: หน้าก่อนอ่านวันที่ 3 = {R2}</b><br>
+                    <b>วันที่ 2:</b> อ่าน {f1_3_s} + {X} หน้า ทำให้เหลือ {R2} หน้า<br>
+                    &nbsp;&nbsp;&nbsp;👉 ตั้งสมการ: ส่วนที่เหลือ = {f2_3_s} ของวันนั้น<br>
+                    &nbsp;&nbsp;&nbsp;👉 {f2_3_s} × 🔲 = {R2} + {X} = {R2+X}<br>
+                    &nbsp;&nbsp;&nbsp;👉 นำ 3/2 คูณทั้งสองข้าง ➔ <b>สมการล่าสุด: หน้าก่อนอ่านวันที่ 2 = {R1}</b><br>
                     <b>วันที่ 1:</b> อ่าน {f1_4_s} ทำให้เหลือ {R1} หน้า<br>
-                    &nbsp;&nbsp;&nbsp;👉 ซึ่ง {R1} หน้า คิดเป็น {f3_4_s} ของทั้งเล่ม<br>
-                    &nbsp;&nbsp;&nbsp;👉 จำนวนหน้าทั้งหมด = ({R1} ÷ 3) × 4 = <b>{Total} หน้า</b><br>
+                    &nbsp;&nbsp;&nbsp;👉 ตั้งสมการ: ส่วนที่เหลือ = {f3_4_s} ของทั้งเล่ม<br>
+                    &nbsp;&nbsp;&nbsp;👉 {f3_4_s} × 🔲(ทั้งหมด) = {R1}<br>
+                    &nbsp;&nbsp;&nbsp;👉 นำ 4/3 คูณทั้งสองข้าง ➔ <b>สมการล่าสุด: หน้าทั้งหมด = {Total}</b><br>
                     <b>ตอบ: {Total} หน้า</b></span>"""
                 else:
                     if is_p12: 
@@ -523,9 +596,14 @@ def generate_questions_logic(level, sub_t, num_q, is_challenge):
                         total_breads = baskets * breads_per_b
                         ask_b = random.randint(2, baskets-1)
                         q = f"<b>{name}</b> แบ่งขนมปัง <b>{total_breads} ชิ้น</b> ใส่ตะกร้า <b>{baskets} ใบ</b> ใบละเท่าๆ กัน<br>จงหาว่าขนมปังที่อยู่ในตะกร้า <b>{ask_b} ใบ</b> มีทั้งหมดกี่ชิ้น?"
-                        sol = f"""<span style='color: #2c3e50;'><b>วิธีคิด:</b><br>
-                        <b>ขั้นตอนที่ 1:</b> หาว่า 1 ตะกร้ามีกี่ชิ้น ➔ {total_breads} ÷ {baskets} = <b>{breads_per_b} ชิ้น</b><br>
-                        <b>ขั้นตอนที่ 2:</b> ถ้าต้องการ {ask_b} ตะกร้า ➔ นำ {breads_per_b} × {ask_b} = <b>{breads_per_b * ask_b} ชิ้น</b><br>
+                        sol = f"""<span style='color: #2c3e50;'><b>วิธีคิด (สมการแบ่งกลุ่ม):</b><br>
+                        <b>ขั้นตอนที่ 1: ตั้งสมการหาจำนวนต่อตะกร้า</b><br>
+                        &nbsp;&nbsp;&nbsp;👉 สมการ: 🔲 (ชิ้นต่อตะกร้า) × {baskets} = {total_breads}<br>
+                        &nbsp;&nbsp;&nbsp;👉 <b>นำ {baskets} หารทั้งสองข้างของสมการ</b><br>
+                        &nbsp;&nbsp;&nbsp;👉 <b>สมการล่าสุด: 🔲 = {breads_per_b} ชิ้น</b><br>
+                        <b>ขั้นตอนที่ 2: ตั้งสมการหาผลรวมที่ต้องการ</b><br>
+                        &nbsp;&nbsp;&nbsp;👉 สมการ: 🔲 (รวม) = {breads_per_b} × {ask_b}<br>
+                        &nbsp;&nbsp;&nbsp;👉 <b>สมการล่าสุด: 🔲 (รวม) = {breads_per_b * ask_b} ชิ้น</b><br>
                         <b>ตอบ: {breads_per_b * ask_b} ชิ้น</b></span>"""
                     else:
                         den = random.choice([4, 5, 6, 8, 10])
@@ -536,12 +614,14 @@ def generate_questions_logic(level, sub_t, num_q, is_challenge):
                         frac_html = get_vertical_fraction(num, den)
                         
                         q = f"<b>{name}</b> มีเงิน <b>{total_money} บาท</b> ซื้อเครื่องเขียนไป <b>{frac_html}</b> ของเงินทั้งหมด จะเหลือเงินกี่บาท?"
-                        sol = f"""<span style='color: #2c3e50;'><b>วิธีคิดอย่างละเอียด:</b><br>
-                        <b>ขั้นตอนที่ 1: หาเงินที่ใช้ไป</b><br>
-                        &nbsp;&nbsp;&nbsp;👉 นำเงินทั้งหมดมาแบ่งเป็น {den} ส่วน: {total_money} ÷ {den} = {total_money//den} บาท/ส่วน<br>
-                        &nbsp;&nbsp;&nbsp;👉 ใช้ไป {num} ส่วน: {total_money//den} × {num} = <b>{int((total_money/den)*num)} บาท</b><br>
-                        <b>ขั้นตอนที่ 2: หาเงินที่เหลือ</b><br>
-                        &nbsp;&nbsp;&nbsp;👉 นำเงินตอนแรกมาหักออก: {total_money} - {int((total_money/den)*num)} = <b>{ans_rem} บาท</b><br>
+                        sol = f"""<span style='color: #2c3e50;'><b>วิธีคิดอย่างละเอียด (วิเคราะห์เป็นสมการ):</b><br>
+                        <b>ขั้นตอนที่ 1: หาจำนวนเงินที่ใช้ไปเป็นสมการ</b><br>
+                        &nbsp;&nbsp;&nbsp;👉 สมการ: เงินที่ใช้ = ({num} ÷ {den}) × {total_money}<br>
+                        &nbsp;&nbsp;&nbsp;👉 <b>สมการล่าสุด: เงินที่ใช้ = {int((total_money/den)*num)} บาท</b><br>
+                        <b>ขั้นตอนที่ 2: คำนวณเงินที่เหลือ</b><br>
+                        &nbsp;&nbsp;&nbsp;👉 สมการ: เงินที่เหลือ = เงินตอนแรก - เงินที่ใช้ไป<br>
+                        &nbsp;&nbsp;&nbsp;👉 แทนค่า: เงินที่เหลือ = {total_money} - {int((total_money/den)*num)}<br>
+                        &nbsp;&nbsp;&nbsp;👉 <b>สมการล่าสุด: เงินที่เหลือ = {ans_rem} บาท</b><br>
                         <b>ตอบ: {ans_rem} บาท</b></span>"""
 
             # ---------------------------------------------------------
@@ -564,22 +644,22 @@ def generate_questions_logic(level, sub_t, num_q, is_challenge):
                     final_h = real_h + carry_h
                     
                     q = f"นาฬิกาเรือนหนึ่งทำงานผิดปกติ โดยจะเดิน <b>'เร็วเกินไป' วันละ {gain_m} นาที</b><br>ถ้า<b>{name}</b>ตั้งเวลานาฬิกาเรือนนี้ให้ตรงกับเวลาจริงในตอน <b>08:00 น. ของวันจันทร์</b><br>จงหาว่าเมื่อเวลาจริงคือ <b>08:00 น. ของวัน{end_day}ในสัปดาห์เดียวกัน</b> นาฬิกาเรือนนี้จะชี้บอกเวลาใด?"
-                    sol = f"""<span style='color: #2c3e50;'><b>วิธีคิดวิเคราะห์ (คำนวณความคลาดเคลื่อนสะสม):</b><br>
-                    <b>ขั้นตอนที่ 1: หาจำนวนวันที่ผ่านไป</b><br>
-                    &nbsp;&nbsp;&nbsp;👉 จาก 08:00 น. วันจันทร์ ถึง 08:00 น. วัน{end_day} นับเวลาที่ผ่านไปได้ <b>{days} วันพอดีเป๊ะ</b><br>
-                    <b>ขั้นตอนที่ 2: หาเวลาที่นาฬิกาเดินเพี้ยนไปทั้งหมด</b><br>
-                    &nbsp;&nbsp;&nbsp;👉 เดินเร็ววันละ {gain_m} นาที × {days} วัน = <b>เดินเร็วไปทั้งหมด {total_gain} นาที</b><br>
-                    <b>ขั้นตอนที่ 3: คำนวณเวลาบนหน้าปัด</b><br>
-                    &nbsp;&nbsp;&nbsp;👉 เวลาจริงคือ 08:00 น. แต่นาฬิกาจะเดินนำหน้าไปอีก {total_gain} นาที<br>
-                    &nbsp;&nbsp;&nbsp;👉 แปลงนาทีที่เดินเร็วเป็นชั่วโมง: {total_gain} นาที = <b>{carry_h} ชั่วโมง {final_m} นาที</b><br>
-                    &nbsp;&nbsp;&nbsp;👉 นำไปบวกเพิ่มจากเวลาจริง: 08:00 น. + {carry_h} ชั่วโมง {final_m} นาที = <b>{final_h:02d}:{final_m:02d} น.</b><br>
+                    sol = f"""<span style='color: #2c3e50;'><b>วิธีคิดวิเคราะห์ (สมการความคลาดเคลื่อนสะสม):</b><br>
+                    <b>ขั้นตอนที่ 1: สมการหาจำนวนวัน</b><br>
+                    &nbsp;&nbsp;&nbsp;👉 สมการ: วันทั้งหมด = วัน{end_day} - วันจันทร์ ➔ <b>สมการล่าสุด: วันทั้งหมด = {days} วัน</b><br>
+                    <b>ขั้นตอนที่ 2: สมการหาเวลาเพี้ยนรวม</b><br>
+                    &nbsp;&nbsp;&nbsp;👉 สมการ: เวลาที่เดินเร็ว = {gain_m} × {days} ➔ <b>สมการล่าสุด: เวลาที่เดินเร็ว = {total_gain} นาที</b><br>
+                    <b>ขั้นตอนที่ 3: สมการคำนวณเวลาบนหน้าปัด</b><br>
+                    &nbsp;&nbsp;&nbsp;👉 สมการ: เวลาหน้าปัด = เวลาจริง + เวลาที่เดินเร็ว<br>
+                    &nbsp;&nbsp;&nbsp;👉 แปลง {total_gain} นาที = <b>{carry_h} ชั่วโมง {final_m} นาที</b><br>
+                    &nbsp;&nbsp;&nbsp;👉 แทนค่า: 08:00 น. + {carry_h} ชั่วโมง {final_m} นาที = <b>{final_h:02d}:{final_m:02d} น.</b><br>
                     <b>ตอบ: เวลา {final_h:02d}:{final_m:02d} น.</b></span>"""
                 else:
                     if is_p12: 
                         h1 = random.randint(1, 4); m1 = random.randint(10, 20)
                         h2 = random.randint(1, 3); m2 = random.randint(10, 30)
                         q = f"<b>{name}</b> ใช้เวลาเดินทางช่วงแรก <b>{h1} ชั่วโมง {m1} นาที</b> และช่วงที่สองอีก <b>{h2} ชั่วโมง {m2} นาที</b> รวมใช้เวลาเท่าไร?"
-                        sol = f"<span style='color: #2c3e50;'>รวมชั่วโมง: {h1} + {h2} = <b>{h1+h2} ชั่วโมง</b><br>รวมนาที: {m1} + {m2} = <b>{m1+m2} นาที</b><br><b>ตอบ: {h1+h2} ชั่วโมง {m1+m2} นาที</b></span>"
+                        sol = f"<span style='color: #2c3e50;'><b>สร้างสมการเวลารวม:</b><br>👉 สมการชั่วโมง = {h1} + {h2} = <b>{h1+h2} ชั่วโมง</b><br>👉 สมการนาที = {m1} + {m2} = <b>{m1+m2} นาที</b><br><b>ตอบ: {h1+h2} ชั่วโมง {m1+m2} นาที</b></span>"
                     elif is_p34:
                         km1 = random.randint(2, 6); m1 = random.randint(400, 800)
                         m2 = random.randint(1200, 2500)
@@ -587,10 +667,11 @@ def generate_questions_logic(level, sub_t, num_q, is_challenge):
                         ans_km = total_m // 1000
                         ans_m = total_m % 1000
                         q = f"<b>{name}</b> จงหาผลบวกของระยะทาง:<br><b>{km1} กิโลเมตร {m1} เมตร  +  {m2} เมตร</b>  =  🔲 กิโลเมตร 🔲 เมตร"
-                        sol = f"""<span style='color: #2c3e50;'><b>วิธีคิด:</b><br>
-                        แปลงทุกอย่างเป็นเมตรก่อน: ({km1} × 1000) + {m1} = {km1 * 1000 + m1} เมตร<br>
-                        นำมาบวกกัน: {km1 * 1000 + m1} + {m2} = <b>{total_m} เมตร</b><br>
-                        แปลงกลับเป็นกิโลเมตร: {total_m} เมตร = <b>{ans_km} กม. {ans_m} ม.</b><br>
+                        sol = f"""<span style='color: #2c3e50;'><b>วิธีคิด (สมการระยะทาง):</b><br>
+                        แปลงเป็นหน่วยเดียว: ({km1} × 1000) + {m1} = {km1 * 1000 + m1} เมตร<br>
+                        สมการผลบวก: 🔲 = {km1 * 1000 + m1} + {m2}<br>
+                        <b>สมการล่าสุด: 🔲 = {total_m} เมตร</b><br>
+                        แปลงกลับ: {total_m} เมตร = <b>{ans_km} กม. {ans_m} ม.</b><br>
                         <b>ตอบ: {ans_km} กิโลเมตร {ans_m} เมตร</b></span>"""
                     else:
                         h1 = random.randint(2, 6); m1 = random.randint(40, 55)
@@ -600,10 +681,12 @@ def generate_questions_logic(level, sub_t, num_q, is_challenge):
                         left_m = total_m % 60
                         ans_h = h1 + h2 + carry_h
                         q = f"<b>{name}</b> เดินทางด้วยรถยนต์ <b>{h1} ชม. {m1} นาที</b> และต่อเรืออีก <b>{h2} ชม. {m2} นาที</b> รวมใช้เวลาทั้งหมดเท่าไร?"
-                        sol = f"""<span style='color: #2c3e50;'><b>วิธีคิดอย่างละเอียด:</b><br>
-                        <b>ขั้นตอนที่ 1:</b> นำนาทีมาบวกกัน: {m1} + {m2} = <b>{total_m} นาที</b><br>
-                        <b>ขั้นตอนที่ 2:</b> เนื่องจาก 60 นาที = 1 ชั่วโมง ➔ เราสามารถปัด {total_m} นาที เป็น <b>{carry_h} ชั่วโมง กับอีก {left_m} นาที</b><br>
-                        <b>ขั้นตอนที่ 3:</b> นำชั่วโมงมาบวกกันทั้งหมด: {h1} + {h2} + {carry_h} (ที่ทดมา) = <b>{ans_h} ชั่วโมง</b><br>
+                        sol = f"""<span style='color: #2c3e50;'><b>วิธีคิดอย่างละเอียด (สมการเวลา):</b><br>
+                        <b>ขั้นตอนที่ 1: สมการนาที</b><br>
+                        &nbsp;&nbsp;&nbsp;👉 🔲 = {m1} + {m2} ➔ <b>สมการล่าสุด: 🔲 = {total_m} นาที</b><br>
+                        &nbsp;&nbsp;&nbsp;👉 ปัด {total_m} นาที = <b>{carry_h} ชม. {left_m} นาที</b><br>
+                        <b>ขั้นตอนที่ 2: สมการชั่วโมง</b><br>
+                        &nbsp;&nbsp;&nbsp;👉 🔲 = {h1} + {h2} + {carry_h} ➔ <b>สมการล่าสุด: 🔲 = {ans_h} ชั่วโมง</b><br>
                         <b>ตอบ: {ans_h} ชั่วโมง {left_m} นาที</b></span>"""
 
             # ---------------------------------------------------------
@@ -617,17 +700,22 @@ def generate_questions_logic(level, sub_t, num_q, is_challenge):
                     L = 4 * P + 6 * C
                     
                     q = f"ในฟาร์มของ<b>{name}</b>มี หมู ไก่ และเป็ด รวมกันทั้งหมด <b>{H} ตัว (นับหัว)</b> และนับขารวมกันได้ <b>{L} ขา</b><br>ถ้าเจ้าของฟาร์มบอกว่า <b>'มีจำนวนเป็ดเป็น 2 เท่าของจำนวนไก่'</b><br>จงหาว่าในฟาร์มแห่งนี้มีหมูทั้งหมดกี่ตัว?"
-                    sol = f"""<span style='color: #2c3e50;'><b>วิธีคิดวิเคราะห์ (สมการนับหัว-นับขา):</b><br>
-                    <b>ขั้นตอนที่ 1: ยุบรวมสัตว์ปีก (ไก่และเป็ด) ให้เป็นกลุ่มเดียว</b><br>
-                    &nbsp;&nbsp;&nbsp;👉 เป็ดมีเป็น 2 เท่าของไก่ แปลว่าถ้าจัดกลุ่ม: ไก่ 1 ตัว จะมาพร้อมกับ เป็ด 2 ตัว เสมอ (รวมเป็น 3 ตัวใน 1 เซ็ต)<br>
-                    &nbsp;&nbsp;&nbsp;👉 1 เซ็ตมี 3 ตัว (หัว) และมีขา = (ไก่ 1 ตัว = 2 ขา) + (เป็ด 2 ตัว = 4 ขา) = <b>6 ขาต่อเซ็ต</b><br>
-                    &nbsp;&nbsp;&nbsp;👉 สรุป: สัตว์ปีก 1 เซ็ต มี 3 หัว 6 ขา (ซึ่งตกเฉลี่ย <b>หัวละ 2 ขา</b> เท่าเดิม!)<br>
-                    <b>ขั้นตอนที่ 2: สมมติฐานแบบสุดโต่ง (สมมติว่าเป็นสัตว์ปีกทั้งหมด)</b><br>
-                    &nbsp;&nbsp;&nbsp;👉 ถ้าสัตว์ทั้ง {H} ตัวเป็นสัตว์ปีกทั้งหมด จะมีขา: {H} × 2 = <b>{H*2} ขา</b><br>
-                    &nbsp;&nbsp;&nbsp;👉 แต่ขาจริงมี {L} ขา แสดงว่ามีขาเกินมา: {L} - {H*2} = <b>{L - H*2} ขา</b><br>
-                    <b>ขั้นตอนที่ 3: หาจำนวนหมู</b><br>
-                    &nbsp;&nbsp;&nbsp;👉 ขาที่เกินมา เกิดจากการที่ "หมูมีขามากกว่าสัตว์ปีกอยู่ตัวละ 2 ขา" (4 ลบ 2)<br>
-                    &nbsp;&nbsp;&nbsp;👉 นำขาที่เกินมา หารด้วย 2 จะได้จำนวนหมู: {L - H*2} ÷ 2 = <b>{P} ตัว</b><br>
+                    sol = f"""<span style='color: #2c3e50;'><b>วิธีคิดวิเคราะห์ (สมการนับหัว-นับขา แบบ Step by Step):</b><br>
+                    <b>ขั้นตอนที่ 1: กำหนดตัวแปรและสร้างกลุ่มสัตว์ปีก</b><br>
+                    &nbsp;&nbsp;&nbsp;👉 ให้ หมู = M, ไก่ = C, เป็ด = D<br>
+                    &nbsp;&nbsp;&nbsp;👉 จากโจทย์ "เป็ดเป็น 2 เท่าของไก่" (D = 2C) ดังนั้นจัดกลุ่ม (ไก่ 1 + เป็ด 2) เป็น 1 เซ็ต<br>
+                    &nbsp;&nbsp;&nbsp;👉 1 เซ็ต มี 3 ตัว และมีขา = 2(ไก่) + 2×2(เป็ด) = 6 ขา<br>
+                    &nbsp;&nbsp;&nbsp;👉 ค่าเฉลี่ยของสัตว์ปีก 1 ตัวในกลุ่มนี้ คือ 6 ÷ 3 = <b>2 ขาต่อตัว</b><br>
+                    <b>ขั้นตอนที่ 2: ตั้งสมมติฐานและสร้างสมการ</b><br>
+                    &nbsp;&nbsp;&nbsp;👉 สมมติให้สัตว์ทั้ง {H} ตัวเป็นสัตว์ปีก (มี 2 ขา) ขารวมสมมติคือ: {H} × 2 = <b>{H*2} ขา</b><br>
+                    &nbsp;&nbsp;&nbsp;👉 ขาของจริงคือ {L} ขา แสดงว่ามีส่วนต่างขาที่เกินมา: {L} - {H*2} = <b>{L - H*2} ขา</b><br>
+                    &nbsp;&nbsp;&nbsp;👉 <b>สมการล่าสุด: ขาของหมูที่เกินจาก 2 ขา = {L - H*2} ขา</b><br>
+                    <b>ขั้นตอนที่ 3: คำนวณหาจำนวนหมู (M) ด้วยคุณสมบัติการเท่ากัน</b><br>
+                    &nbsp;&nbsp;&nbsp;👉 หมูแต่ละตัวมี 4 ขา ซึ่งมากกว่าสัตว์ปีกอยู่ 2 ขา (4 - 2 = 2)<br>
+                    &nbsp;&nbsp;&nbsp;👉 สมการจำนวนหมู: M × 2 = {L - H*2}<br>
+                    &nbsp;&nbsp;&nbsp;👉 <b>นำ 2 มาหารทั้งสองข้างของสมการ</b><br>
+                    &nbsp;&nbsp;&nbsp;👉 (M × 2) ÷ 2 = {L - H*2} ÷ 2<br>
+                    &nbsp;&nbsp;&nbsp;👉 <b>สมการล่าสุด: M = {P}</b><br>
                     <b>ตอบ: มีหมู {P} ตัว</b></span>"""
                 else:
                     if is_p12: 
@@ -636,9 +724,11 @@ def generate_questions_logic(level, sub_t, num_q, is_challenge):
                         total_items = dozens * 12
                         ans = total_items // students
                         q = f"คุณครู<b>{name}</b>มีดินสอ <b>{dozens} โหล</b> นำมาแบ่งให้นักเรียน <b>{students} คน</b> คนละเท่าๆ กัน<br>นักเรียนจะได้รับดินสอคนละกี่แท่ง?"
-                        sol = f"""<span style='color: #2c3e50;'><b>วิธีคิด:</b><br>
-                        <b>ขั้นตอนที่ 1:</b> แปลงโหลเป็นแท่ง (1 โหล = 12 แท่ง) ➔ {dozens} โหล = {dozens} × 12 = <b>{total_items} แท่ง</b><br>
-                        <b>ขั้นตอนที่ 2:</b> แบ่งให้เด็ก {students} คน ➔ นำมาหาร: {total_items} ÷ {students} = <b>{ans} แท่ง</b><br>
+                        sol = f"""<span style='color: #2c3e50;'><b>วิธีคิด (สมการแบ่งของ):</b><br>
+                        <b>ขั้นตอนที่ 1: สมการหาของทั้งหมด</b><br>
+                        &nbsp;&nbsp;&nbsp;👉 🔲 = {dozens} × 12 ➔ <b>สมการล่าสุด: 🔲 = {total_items} แท่ง</b><br>
+                        <b>ขั้นตอนที่ 2: สมการแบ่งให้เด็ก</b><br>
+                        &nbsp;&nbsp;&nbsp;👉 🔲 = {total_items} ÷ {students} ➔ <b>สมการล่าสุด: 🔲 = {ans} แท่ง</b><br>
                         <b>ตอบ: {ans} แท่ง</b></span>"""
                     else:
                         g1_std, g1_items = random.randint(10, 15), random.randint(5, 9)
@@ -648,11 +738,11 @@ def generate_questions_logic(level, sub_t, num_q, is_challenge):
                         diff = abs(t1 - t2)
                         more_g = "กลุ่มแรก" if t1 > t2 else "กลุ่มที่สอง"
                         q = f"คุณครู<b>{name}</b>แจกสมุดให้เด็กกลุ่มแรก <b>{g1_std} คน คนละ {g1_items} เล่ม</b> และกลุ่มที่สอง <b>{g2_std} คน คนละ {g2_items} เล่ม</b><br>กลุ่มใดได้รับสมุดรวมมากกว่ากัน และมากกว่ากันกี่เล่ม?"
-                        sol = f"""<span style='color: #2c3e50;'><b>วิธีคิด:</b><br>
-                        <b>ขั้นตอนที่ 1:</b> หากลุ่มแรก ➔ {g1_std} × {g1_items} = <b>{t1} เล่ม</b><br>
-                        <b>ขั้นตอนที่ 2:</b> หากลุ่มที่สอง ➔ {g2_std} × {g2_items} = <b>{t2} เล่ม</b><br>
-                        <b>ขั้นตอนที่ 3:</b> เปรียบเทียบ จะเห็นว่า <b>{more_g}</b> ได้มากกว่า<br>
-                        <b>ขั้นตอนที่ 4:</b> หาผลต่าง ➔ {max(t1,t2)} - {min(t1,t2)} = <b>{diff} เล่ม</b><br>
+                        sol = f"""<span style='color: #2c3e50;'><b>วิธีคิด (สมการเปรียบเทียบ):</b><br>
+                        <b>ขั้นตอนที่ 1: สมการกลุ่มแรก</b> ➔ 🔲 = {g1_std} × {g1_items} ➔ <b>สมการล่าสุด: 🔲 = {t1} เล่ม</b><br>
+                        <b>ขั้นตอนที่ 2: สมการกลุ่มที่สอง</b> ➔ 🔲 = {g2_std} × {g2_items} ➔ <b>สมการล่าสุด: 🔲 = {t2} เล่ม</b><br>
+                        <b>ขั้นตอนที่ 3: สมการผลต่าง</b><br>
+                        &nbsp;&nbsp;&nbsp;👉 🔲 = {max(t1,t2)} - {min(t1,t2)} ➔ <b>สมการล่าสุด: 🔲 = {diff} เล่ม</b><br>
                         <b>ตอบ: {more_g} มากกว่าอยู่ {diff} เล่ม</b></span>"""
 
             else:
@@ -800,7 +890,7 @@ if st.sidebar.button(f"{'🚀 สั่งสร้างข้อสอบร�
         st.session_state['zip_data'] = zip_buffer.getvalue()
 
 if 'ebook_html' in st.session_state:
-    st.success(f"✅ สร้างไฟล์ข้อสอบสำเร็จ! เอาหน้าปกออกแล้ว และกู้คืนหัว Title ของ King Math ให้กลับมาสวยงามดังเดิมครับ")
+    st.success(f"✅ โค้ดอัปเดตเรียบร้อยครับ! เปลี่ยนการอธิบายเป็นรูปแบบ Step by Step เชิงสมการ โดยระบุคุณสมบัติการเท่ากัน (นำ...มาบวก/ลบ/คูณ/หาร ทั้งสองข้าง) พร้อมสรุป 'สมการล่าสุด' ทุกบรรทัดครับ")
     c1, c2 = st.columns(2)
     with c1:
         st.download_button("📄 โหลดเฉพาะโจทย์", data=st.session_state['worksheet_html'], file_name=f"{st.session_state['filename_base']}_Worksheet.html", mime="text/html", use_container_width=True)
