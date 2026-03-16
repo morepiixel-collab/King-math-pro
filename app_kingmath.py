@@ -19,11 +19,19 @@ st.markdown("""
     div[data-testid="stSidebar"] div.stButton > button:hover { background-color: #e74c3c; transform: translateY(-2px); box-shadow: 0 6px 12px rgba(192,57,43,0.4); }
     div.stDownloadButton > button { border-radius: 8px; font-weight: bold; border: 1px solid #bdc3c7; }
     div.stDownloadButton > button:hover { border-color: #c0392b; color: #c0392b; }
-    .main-header { background: linear-gradient(135deg, #2c3e50, #c0392b); padding: 2rem; border-radius: 15px; color: white; margin-bottom: 2rem; box-shadow: 0 10px 20px rgba(0,0,0,0.15); }
+    .main-header { background: linear-gradient(135deg, #2c3e50, #c0392b); padding: 2rem; border-radius: 15px; color: white; margin-bottom: 2rem; box-shadow: 0 10px 20px rgba(0,0,0,0.15); transition: all 0.5s ease; }
     .main-header.challenge { background: linear-gradient(135deg, #000000, #c0392b, #8e44ad); }
     .main-header h1 { margin: 0; font-size: 2.8rem; font-weight: 800; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); }
     .main-header p { margin: 10px 0 0 0; font-size: 1.2rem; opacity: 0.9; }
 </style>
+""", unsafe_allow_html=True)
+
+# กู้คืน Title ของ King Math Pro ให้ถูกต้อง
+st.markdown("""
+<div class="main-header">
+    <h1>👑 King Math Pro <span style="font-size: 20px; background: #f1c40f; color: #333; padding: 5px 15px; border-radius: 20px; vertical-align: middle;">Critical Thinking</span></h1>
+    <p>ระบบสร้างข้อสอบวิเคราะห์คณิตศาสตร์ระดับแนวหน้า (โจทย์ปัญหา & เชาวน์ปัญญา) พร้อมเฉลยละเอียด</p>
+</div>
 """, unsafe_allow_html=True)
 
 # ==========================================
@@ -59,7 +67,7 @@ def get_vertical_math(top_chars, bottom_chars, result_chars, operator="+"):
 king_topics = [
     "การสร้างจำนวนจากเลขโดด", "โจทย์ปัญหาทำผิดเป็นถูก", "การนับตารางเรขาคณิต",
     "ปริศนาสมการช่องว่าง", "อสมการและค่าที่เป็นไปได้", "ปริศนาตัวเลขที่หายไป",         
-    "ความยาวและเส้นรอบรูป", "โจทย์ปัญหาเศษส่วนประยุกต์", "การคำนวณหน่วยและเวลา", "โจทย์ปัญหาเปรียบเทียบกลุ่ม"       
+    "ความยาวและเส้นรอบรูป", "โจทย์ปัญหาเศษส่วนประยุกต์", "การคำนวณหน่วยและเวลา", "โจทย์ปัญหาเปรียบเทียบกลุ่ม"        
 ]
 
 comp_db = {
@@ -572,7 +580,7 @@ def generate_questions_logic(level, sub_t, num_q, is_challenge):
                         h2 = random.randint(1, 3); m2 = random.randint(10, 30)
                         q = f"<b>{name}</b> ใช้เวลาเดินทางช่วงแรก <b>{h1} ชั่วโมง {m1} นาที</b> และช่วงที่สองอีก <b>{h2} ชั่วโมง {m2} นาที</b> รวมใช้เวลาเท่าไร?"
                         sol = f"<span style='color: #2c3e50;'>รวมชั่วโมง: {h1} + {h2} = <b>{h1+h2} ชั่วโมง</b><br>รวมนาที: {m1} + {m2} = <b>{m1+m2} นาที</b><br><b>ตอบ: {h1+h2} ชั่วโมง {m1+m2} นาที</b></span>"
-                    elif is_p34: # P3-P4 Logic Restored
+                    elif is_p34:
                         km1 = random.randint(2, 6); m1 = random.randint(400, 800)
                         m2 = random.randint(1200, 2500)
                         total_m = (km1 * 1000) + m1 + m2
@@ -599,7 +607,7 @@ def generate_questions_logic(level, sub_t, num_q, is_challenge):
                         <b>ตอบ: {ans_h} ชั่วโมง {left_m} นาที</b></span>"""
 
             # ---------------------------------------------------------
-            # 10. โจทย์ปัญหาเปรียบเทียบกลุ่ม (แก้บั๊กสัตว์ปีก 4 ขา เป็น 2 ขา)
+            # 10. โจทย์ปัญหาเปรียบเทียบกลุ่ม 
             # ---------------------------------------------------------
             elif actual_sub_t == "โจทย์ปัญหาเปรียบเทียบกลุ่ม":
                 if is_challenge:
@@ -714,35 +722,6 @@ def create_page(level, sub_t, questions, is_key=False, q_margin="20px", ws_heigh
         
     return html + "</body></html>"
 
-def generate_cover_html(level, sub_t, num_q, brand_name, is_challenge):
-    theme_color = "#8e44ad" if is_challenge else "#d35400"
-    badge_text = "🔥 ULTIMATE CHALLENGE MODE" if is_challenge else "(King Math Edition)"
-    
-    return f"""<!DOCTYPE html><html lang="th"><head><meta charset="utf-8">
-    <style>
-        .cover-inner {{ width: 100%; height: 100%; padding: 40px; box-sizing: border-box; text-align: center; position: relative; border: 15px solid {theme_color}; background: white; }}
-        .title-box {{ margin-top: 80px; }}
-        .title {{ font-size: 65px; color: #2c3e50; font-weight: bold; margin: 0; line-height: 1.2; }}
-        .grade-badge {{ font-size: 40px; background-color: #f1c40f; color: #333; padding: 15px 50px; border-radius: 50px; display: inline-block; font-weight: bold; margin-top: 30px; }}
-        .topic {{ font-size: 42px; color: #34495e; margin-top: 70px; font-weight: bold; }}
-        .sub-topic {{ font-size: 32px; color: {theme_color}; margin-top: 10px; font-weight: bold; text-shadow: 1px 1px 2px rgba(0,0,0,0.1);}}
-        .icons {{ font-size: 110px; margin: 60px 0; }}
-        .details-badge {{ background-color: {theme_color}; color: white; display: inline-block; padding: 15px 40px; border-radius: 15px; font-size: 32px; font-weight: bold; box-shadow: 0 4px 6px rgba(0,0,0,0.1);}}
-        .footer {{ position: absolute; bottom: 40px; left: 0; width: 100%; text-align: center; font-size: 22px; color: #7f8c8d; }}
-    </style></head><body>
-    <div class="cover-inner">
-        <div class="title-box">
-            <h1 class="title">ข้อสอบวิเคราะห์คณิตศาสตร์</h1>
-            <div class="grade-badge">{level}</div>
-        </div>
-        <div class="topic">เรื่อง: {sub_t}</div>
-        <div class="sub-topic">{badge_text}</div>
-        <div class="icons">{'⚔️ 🧠 🏆 🚀' if is_challenge else '👑 🧠 💡 🎯'}</div>
-        <div class="details-badge">รวมทั้งหมด {num_q} ข้อ (พร้อมเฉลยละเอียด)</div>
-        <div class="footer"><b>ออกแบบและจัดทำโดย:</b> {brand_name}</div>
-    </div>
-    </body></html>"""
-
 # ==========================================
 # 4. Streamlit UI (Sidebar & Result Grouping)
 # ==========================================
@@ -786,9 +765,8 @@ elif spacing_level == "กว้าง": q_margin, ws_height = "30px", "280px"
 else: q_margin, ws_height = "40px", "400px"
 
 st.sidebar.markdown("---")
-st.sidebar.markdown("### 🎨 ตั้งค่าแบรนด์ & หน้าปก")
+st.sidebar.markdown("### 🎨 ตั้งค่าแบรนด์")
 brand_name = st.sidebar.text_input("🏷️ ชื่อแบรนด์ / ผู้สอน:", value="บ้านทีเด็ด")
-include_cover = st.sidebar.checkbox("🎨 สร้างหน้าปก", value=True)
 
 if st.sidebar.button(f"{'🚀 สั่งสร้างข้อสอบระดับ Ultimate Challenge!' if is_challenge else '🚀 สั่งสร้างข้อสอบ King Math'}", type="primary", use_container_width=True):
     with st.spinner("กำลังตรวจสอบตรรกะระดับ Deep Scan และวาดภาพเศษส่วนแนวตั้ง..."):
@@ -797,18 +775,15 @@ if st.sidebar.button(f"{'🚀 สั่งสร้างข้อสอบร�
         
         html_w = create_page(selected_level, selected_sub, qs, is_key=False, q_margin=q_margin, ws_height=ws_height, brand_name=brand_name, is_challenge=is_challenge)
         html_k = create_page(selected_level, selected_sub, qs, is_key=True, q_margin=q_margin, ws_height=ws_height, brand_name=brand_name, is_challenge=is_challenge)
-        html_cover = generate_cover_html(selected_level, selected_sub, num_input, brand_name, is_challenge) if include_cover else ""
         
         st.session_state['worksheet_html'] = html_w
         st.session_state['answerkey_html'] = html_k
         
-        ebook_body = ""
-        if include_cover: ebook_body += f'\n<div class="a4-wrapper cover-wrapper">{extract_body(html_cover)}</div>\n'
-        ebook_body += f'\n<div class="a4-wrapper">{extract_body(html_w)}</div>\n<div class="a4-wrapper">{extract_body(html_k)}</div>\n'
+        ebook_body = f'\n<div class="a4-wrapper">{extract_body(html_w)}</div>\n<div class="a4-wrapper">{extract_body(html_k)}</div>\n'
         
         bg_color = "#2c3e50" if is_challenge else "#525659"
         
-        full_ebook_html = f"""<!DOCTYPE html><html><head><meta charset="utf-8"><link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;700&display=swap" rel="stylesheet"><style>@page {{ size: A4; margin: 15mm; }} @media screen {{ body {{ font-family: 'Sarabun', sans-serif; background-color: {bg_color}; display: flex; flex-direction: column; align-items: center; padding: 40px 0; margin: 0; }} .a4-wrapper {{ width: 210mm; min-height: 297mm; background: white; margin-bottom: 30px; box-shadow: 0 10px 20px rgba(0,0,0,0.3); padding: 15mm; box-sizing: border-box; }} .cover-wrapper {{ padding: 0; }} }} @media print {{ body {{ font-family: 'Sarabun', sans-serif; background: transparent; padding: 0; display: block; margin: 0; }} .a4-wrapper {{ width: 100%; min-height: auto; margin: 0; padding: 0; box-shadow: none; page-break-after: always; }} .cover-wrapper {{ height: 260mm; }} }} .header {{ text-align: center; border-bottom: 2px solid #333; margin-bottom: 10px; padding-bottom: 10px; }} .header h2 {{ color: {'#c0392b' if is_challenge else '#333'}; }} .q-box {{ margin-bottom: {q_margin}; padding: 10px 15px; page-break-inside: avoid; font-size: 20px; line-height: 1.8; }} .workspace {{ height: {ws_height}; border: 2px dashed #bdc3c7; border-radius: 8px; margin: 15px 0; padding: 10px; color: #95a5a6; font-size: 16px; background-color: #fafbfc; }} .ans-line {{ margin-top: 10px; border-bottom: 1px dotted #999; width: 80%; height: 30px; font-weight: bold; font-size: 20px; display: flex; align-items: flex-end; padding-bottom: 5px; }} .sol-text {{ color: #333; font-size: 18px; display: block; margin-top: 15px; padding: 15px; background-color: #fdf2e9; border-left: 4px solid #d35400; border-radius: 4px; line-height: 1.8; }} .page-footer {{ text-align: right; font-size: 14px; color: #95a5a6; margin-top: 20px; border-top: 1px solid #eee; padding-top: 10px; }} .cover-inner {{ width: 100%; height: 100%; padding: 40px; box-sizing: border-box; text-align: center; position: relative; border: 15px solid {'#8e44ad' if is_challenge else '#d35400'}; background: white; }} .title-box {{ margin-top: 80px; }} .title {{ font-size: 65px; color: #2c3e50; font-weight: bold; margin: 0; line-height: 1.2; }} .grade-badge {{ font-size: 40px; background-color: #f1c40f; color: #333; padding: 15px 50px; border-radius: 50px; display: inline-block; font-weight: bold; margin-top: 30px; }} .topic {{ font-size: 42px; color: #34495e; margin-top: 70px; font-weight: bold; }} .sub-topic {{ font-size: 32px; color: {'#8e44ad' if is_challenge else '#7f8c8d'}; margin-top: 10px; font-weight: bold; text-shadow: 1px 1px 2px rgba(0,0,0,0.1);}} .icons {{ font-size: 110px; margin: 60px 0; }} .details-badge {{ background-color: {'#8e44ad' if is_challenge else '#d35400'}; color: white; display: inline-block; padding: 15px 40px; border-radius: 15px; font-size: 32px; font-weight: bold; box-shadow: 0 4px 6px rgba(0,0,0,0.1);}} .footer {{ position: absolute; bottom: 40px; left: 0; width: 100%; text-align: center; font-size: 22px; color: #7f8c8d; }} </style></head><body>{ebook_body}</body></html>"""
+        full_ebook_html = f"""<!DOCTYPE html><html><head><meta charset="utf-8"><link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;700&display=swap" rel="stylesheet"><style>@page {{ size: A4; margin: 15mm; }} @media screen {{ body {{ font-family: 'Sarabun', sans-serif; background-color: {bg_color}; display: flex; flex-direction: column; align-items: center; padding: 40px 0; margin: 0; }} .a4-wrapper {{ width: 210mm; min-height: 297mm; background: white; margin-bottom: 30px; box-shadow: 0 10px 20px rgba(0,0,0,0.3); padding: 15mm; box-sizing: border-box; }} }} @media print {{ body {{ font-family: 'Sarabun', sans-serif; background: transparent; padding: 0; display: block; margin: 0; }} .a4-wrapper {{ width: 100%; min-height: auto; margin: 0; padding: 0; box-shadow: none; page-break-after: always; }} }} .header {{ text-align: center; border-bottom: 2px solid #333; margin-bottom: 10px; padding-bottom: 10px; }} .header h2 {{ color: {'#c0392b' if is_challenge else '#333'}; }} .q-box {{ margin-bottom: {q_margin}; padding: 10px 15px; page-break-inside: avoid; font-size: 20px; line-height: 1.8; }} .workspace {{ height: {ws_height}; border: 2px dashed #bdc3c7; border-radius: 8px; margin: 15px 0; padding: 10px; color: #95a5a6; font-size: 16px; background-color: #fafbfc; }} .ans-line {{ margin-top: 10px; border-bottom: 1px dotted #999; width: 80%; height: 30px; font-weight: bold; font-size: 20px; display: flex; align-items: flex-end; padding-bottom: 5px; }} .sol-text {{ color: #333; font-size: 18px; display: block; margin-top: 15px; padding: 15px; background-color: #fdf2e9; border-left: 4px solid #d35400; border-radius: 4px; line-height: 1.8; }} .page-footer {{ text-align: right; font-size: 14px; color: #95a5a6; margin-top: 20px; border-top: 1px solid #eee; padding-top: 10px; }} </style></head><body>{ebook_body}</body></html>"""
 
         mode_name = "Challenge" if is_challenge else "Normal"
         safe_sub = selected_sub.replace(" ", "_").replace("(", "").replace(")", "").replace("/", "_")
@@ -825,7 +800,7 @@ if st.sidebar.button(f"{'🚀 สั่งสร้างข้อสอบร�
         st.session_state['zip_data'] = zip_buffer.getvalue()
 
 if 'ebook_html' in st.session_state:
-    st.success(f"✅ สร้างไฟล์ข้อสอบสำเร็จ! อัปเกรดเศษส่วนแนวตั้งและขจัดบั๊กแฝงทั้งหมดแล้ว 1,000% ครับ {'(🔥 โหมดตัวตึง Ultimate Challenge!)' if 'Challenge' in st.session_state['filename_base'] else ''}")
+    st.success(f"✅ สร้างไฟล์ข้อสอบสำเร็จ! เอาหน้าปกออกแล้ว และกู้คืนหัว Title ของ King Math ให้กลับมาสวยงามดังเดิมครับ")
     c1, c2 = st.columns(2)
     with c1:
         st.download_button("📄 โหลดเฉพาะโจทย์", data=st.session_state['worksheet_html'], file_name=f"{st.session_state['filename_base']}_Worksheet.html", mime="text/html", use_container_width=True)
