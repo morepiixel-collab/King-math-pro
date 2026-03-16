@@ -192,13 +192,13 @@ def generate_questions_logic(level, sub_t, num_q, is_challenge):
                     <b>ขั้นตอนที่ 1: สร้างสมการจากสิ่งที่ทำผิดพลาด</b><br>
                     &nbsp;&nbsp;&nbsp;👉 {frac_wrong_s} + {B} = {wrong_ans}<br>
                     <b>ขั้นตอนที่ 2: กำจัด +{B} เพื่อหาค่า 🔲</b><br>
-                    &nbsp;&nbsp;&nbsp;👉 นำ {B} มา<b>ลบออกทั้งสองข้างของสมการ</b><br>
-                    &nbsp;&nbsp;&nbsp;👉 จะได้: {frac_wrong_s} + {B} <b>- {B}</b> = {wrong_ans} <b>- {B}</b><br>
+                    &nbsp;&nbsp;&nbsp;👉 นำ {B} มาลบออกทั้งสองข้างของสมการ<br>
+                    &nbsp;&nbsp;&nbsp;👉 จะได้: {frac_wrong_s} + {B} <b style='color:red;'>- {B}</b> = {wrong_ans} <b style='color:red;'>- {B}</b><br>
                     &nbsp;&nbsp;&nbsp;👉 คำนวณฝั่งขวา: {wrong_ans} - {B} = {wrong_ans - B}<br>
                     &nbsp;&nbsp;&nbsp;👉 <b>สมการล่าสุด:</b> {frac_wrong_s} = {wrong_ans - B}<br>
                     <b>ขั้นตอนที่ 3: กำจัดตัวส่วน {A} (การหาร)</b><br>
-                    &nbsp;&nbsp;&nbsp;👉 นำ {A} มา<b>คูณทั้งสองข้างของสมการ</b><br>
-                    &nbsp;&nbsp;&nbsp;👉 จะได้: ({frac_wrong_s}) <b>× {A}</b> = ({wrong_ans - B}) <b>× {A}</b><br>
+                    &nbsp;&nbsp;&nbsp;👉 นำ {A} มาคูณทั้งสองข้างของสมการ<br>
+                    &nbsp;&nbsp;&nbsp;👉 จะได้: ({frac_wrong_s}) <b style='color:red;'>× {A}</b> = ({wrong_ans - B}) <b style='color:red;'>× {A}</b><br>
                     &nbsp;&nbsp;&nbsp;👉 ฝั่งซ้ายตัวส่วน {A} ตัดกันหมดไป, ฝั่งขวาคำนวณได้ {X}<br>
                     &nbsp;&nbsp;&nbsp;👉 <b>สมการล่าสุด (จำนวนปริศนา): 🔲 = {X}</b><br>
                     <b>ขั้นตอนที่ 4: คำนวณใหม่ให้ถูกต้องตามความตั้งใจแรก</b><br>
@@ -219,8 +219,8 @@ def generate_questions_logic(level, sub_t, num_q, is_challenge):
                         <b>ขั้นตอนที่ 1: สร้างสมการจากสิ่งที่ทำผิดพลาด</b><br>
                         &nbsp;&nbsp;&nbsp;👉 🔲 - {x} = {wrong_ans}<br>
                         <b>ขั้นตอนที่ 2: ใช้คุณสมบัติการเท่ากันเพื่อหาค่า 🔲</b><br>
-                        &nbsp;&nbsp;&nbsp;👉 ต้องการกำจัด -{x} จึง<b>นำ {x} มาบวกเพิ่มทั้งสองข้างของสมการ</b><br>
-                        &nbsp;&nbsp;&nbsp;👉 จะได้: 🔲 - {x} <b>+ {x}</b> = {wrong_ans} <b>+ {x}</b><br>
+                        &nbsp;&nbsp;&nbsp;👉 ต้องการกำจัด -{x} จึงนำ {x} มาบวกเพิ่มทั้งสองข้างของสมการ<br>
+                        &nbsp;&nbsp;&nbsp;👉 จะได้: 🔲 - {x} <b style='color:red;'>+ {x}</b> = {wrong_ans} <b style='color:red;'>+ {x}</b><br>
                         &nbsp;&nbsp;&nbsp;👉 คำนวณผลลัพธ์ฝั่งขวา: {wrong_ans} + {x} = {wrong_ans + x}<br>
                         &nbsp;&nbsp;&nbsp;👉 <b>สมการล่าสุด (จำนวนตอนแรก): 🔲 = {wrong_ans + x}</b><br>
                         <b>ขั้นตอนที่ 3: คำนวณผลลัพธ์ที่ถูกต้อง</b><br>
@@ -237,8 +237,8 @@ def generate_questions_logic(level, sub_t, num_q, is_challenge):
                         <b>ขั้นตอนที่ 1: สร้างสมการจากสิ่งที่ทำผิดพลาด (การเขียนเศษส่วนคือการหาร)</b><br>
                         &nbsp;&nbsp;&nbsp;👉 {frac_wrong_s} = {wrong_ans}<br>
                         <b>ขั้นตอนที่ 2: ใช้คุณสมบัติการเท่ากันเพื่อหาค่า 🔲</b><br>
-                        &nbsp;&nbsp;&nbsp;👉 ต้องการกำจัดตัวส่วน {x} จึง<b>นำ {x} มาคูณทั้งสองข้างของสมการ</b><br>
-                        &nbsp;&nbsp;&nbsp;👉 จะได้: ({frac_wrong_s}) <b>× {x}</b> = {wrong_ans} <b>× {x}</b><br>
+                        &nbsp;&nbsp;&nbsp;👉 ต้องการกำจัดตัวส่วน {x} จึงนำ {x} มาคูณทั้งสองข้างของสมการ<br>
+                        &nbsp;&nbsp;&nbsp;👉 จะได้: ({frac_wrong_s}) <b style='color:red;'>× {x}</b> = {wrong_ans} <b style='color:red;'>× {x}</b><br>
                         &nbsp;&nbsp;&nbsp;👉 ฝั่งซ้ายตัวส่วน {x} ตัดกันหมดไป, ฝั่งขวา {wrong_ans} × {x} = {wrong_ans * x}<br>
                         &nbsp;&nbsp;&nbsp;👉 <b>สมการล่าสุด (จำนวนตอนแรก): 🔲 = {wrong_ans * x}</b><br>
                         <b>ขั้นตอนที่ 3: คำนวณผลลัพธ์ที่ถูกต้อง</b><br>
@@ -310,19 +310,23 @@ def generate_questions_logic(level, sub_t, num_q, is_challenge):
                     
                     sol = f"""<span style='color: #2c3e50;'><b>วิธีคิดอย่างละเอียด (แก้สมการจากวงนอกเข้าสู่วงใน ด้วยคุณสมบัติการเท่ากัน):</b><br>
                     <b>ขั้นตอนที่ 1: กำจัดตัวคูณ {A} นอกวงเล็บ</b><br>
-                    &nbsp;&nbsp;&nbsp;👉 นำ {A} มา<b>หารทั้งสองข้างของสมการ</b><br>
-                    &nbsp;&nbsp;&nbsp;👉 ฝั่งซ้าย {A} ตัด {A} หมดไป, ฝั่งขวา {E} ÷ {A} = {V1}<br>
+                    &nbsp;&nbsp;&nbsp;👉 นำ {A} มาหารทั้งสองข้างของสมการ<br>
+                    &nbsp;&nbsp;&nbsp;👉 ({A} × [...]) <b style='color:red;'>÷ {A}</b> = {E} <b style='color:red;'>÷ {A}</b><br>
+                    &nbsp;&nbsp;&nbsp;👉 ฝั่งซ้ายเหลือวงเล็บ, ฝั่งขวา {E} ÷ {A} = {V1}<br>
                     &nbsp;&nbsp;&nbsp;👉 <b>สมการล่าสุด:</b> {frac_sol_step} − {D} = {V1}<br>
                     <b>ขั้นตอนที่ 2: กำจัดตัวลบ {D}</b><br>
-                    &nbsp;&nbsp;&nbsp;👉 นำ {D} มา<b>บวกเพิ่มทั้งสองข้างของสมการ</b><br>
+                    &nbsp;&nbsp;&nbsp;👉 นำ {D} มาบวกเพิ่มทั้งสองข้างของสมการ<br>
+                    &nbsp;&nbsp;&nbsp;👉 {frac_sol_step} − {D} <b style='color:red;'>+ {D}</b> = {V1} <b style='color:red;'>+ {D}</b><br>
                     &nbsp;&nbsp;&nbsp;👉 ฝั่งซ้าย -{D} + {D} = 0, ฝั่งขวา {V1} + {D} = {V2}<br>
                     &nbsp;&nbsp;&nbsp;👉 <b>สมการล่าสุด:</b> {frac_sol_step} = {V2}<br>
                     <b>ขั้นตอนที่ 3: กำจัดตัวส่วน {C} (การหาร)</b><br>
-                    &nbsp;&nbsp;&nbsp;👉 นำ {C} มา<b>คูณทั้งสองข้างของสมการ</b><br>
+                    &nbsp;&nbsp;&nbsp;👉 นำ {C} มาคูณทั้งสองข้างของสมการ<br>
+                    &nbsp;&nbsp;&nbsp;👉 ({frac_sol_step}) <b style='color:red;'>× {C}</b> = {V2} <b style='color:red;'>× {C}</b><br>
                     &nbsp;&nbsp;&nbsp;👉 ฝั่งซ้ายส่วน {C} ตัดกันหมดไป, ฝั่งขวา {V2} × {C} = {V3}<br>
                     &nbsp;&nbsp;&nbsp;👉 <b>สมการล่าสุด:</b> 🔲 + {B} = {V3}<br>
                     <b>ขั้นตอนที่ 4: หาค่า 🔲</b><br>
-                    &nbsp;&nbsp;&nbsp;👉 นำ {B} มา<b>ลบออกทั้งสองข้างของสมการ</b><br>
+                    &nbsp;&nbsp;&nbsp;👉 นำ {B} มาลบออกทั้งสองข้างของสมการ<br>
+                    &nbsp;&nbsp;&nbsp;👉 🔲 + {B} <b style='color:red;'>- {B}</b> = {V3} <b style='color:red;'>- {B}</b><br>
                     &nbsp;&nbsp;&nbsp;👉 ฝั่งซ้ายเหลือ 🔲, ฝั่งขวา {V3} - {B} = {ans}<br>
                     &nbsp;&nbsp;&nbsp;👉 <b>สมการล่าสุด: 🔲 = {ans}</b><br>
                     <b>ตอบ: {ans}</b></span>"""
@@ -332,8 +336,8 @@ def generate_questions_logic(level, sub_t, num_q, is_challenge):
                         q = f"จงหาตัวเลขที่เติมลงในช่องว่าง:<br><br><span style='font-size:24px; font-weight:bold;'>{box_html} + {a} = {b}</span>"
                         sol = f"""<span style='color: #2c3e50;'><b>วิธีคิดอย่างละเอียด (ใช้คุณสมบัติการเท่ากันของสมการ):</b><br>
                         <b>ขั้นตอนที่ 1:</b> จากสมการ 🔲 + {a} = {b}<br>
-                        &nbsp;&nbsp;&nbsp;👉 ต้องการให้ 🔲 เหลือเพียงตัวเดียว จึงใช้คุณสมบัติการเท่ากัน โดย<b>นำ {a} มาลบออกทั้งสองข้างของสมการ</b><br>
-                        &nbsp;&nbsp;&nbsp;👉 เขียนเป็นสมการได้ว่า: 🔲 + {a} <b>- {a}</b> = {b} <b>- {a}</b><br>
+                        &nbsp;&nbsp;&nbsp;👉 ต้องการให้ 🔲 เหลือเพียงตัวเดียว จึงใช้คุณสมบัติการเท่ากัน โดยนำ {a} มาลบออกทั้งสองข้างของสมการ<br>
+                        &nbsp;&nbsp;&nbsp;👉 เขียนเป็นสมการได้ว่า: 🔲 + {a} <b style='color:red;'>- {a}</b> = {b} <b style='color:red;'>- {a}</b><br>
                         <b>ขั้นตอนที่ 2:</b> คำนวณผลลัพธ์แต่ละข้าง<br>
                         &nbsp;&nbsp;&nbsp;👉 ฝั่งซ้าย: {a} - {a} = 0 (เหลือ 🔲 ตัวเดียว)<br>
                         &nbsp;&nbsp;&nbsp;👉 ฝั่งขวา: {b} - {a} = {b-a}<br>
@@ -346,11 +350,13 @@ def generate_questions_logic(level, sub_t, num_q, is_challenge):
                         q = f"จงหาตัวเลขที่เติมลงในช่องว่าง:<br><br><span style='font-size:24px; font-weight:bold;'>( {box_html} + {a} ) × {b} = {c}</span>"
                         sol = f"""<span style='color: #2c3e50;'><b>วิธีคิดอย่างละเอียด (กำจัดตัวแปรด้วยคุณสมบัติการเท่ากัน):</b><br>
                         <b>ขั้นตอนที่ 1: กำจัดตัวนอกวงเล็บ "× {b}"</b><br>
-                        &nbsp;&nbsp;&nbsp;👉 <b>นำ {b} มาหารทั้งสองข้างของสมการ</b><br>
+                        &nbsp;&nbsp;&nbsp;👉 นำ {b} มาหารทั้งสองข้างของสมการ<br>
+                        &nbsp;&nbsp;&nbsp;👉 ( 🔲 + {a} ) × {b} <b style='color:red;'>÷ {b}</b> = {c} <b style='color:red;'>÷ {b}</b><br>
                         &nbsp;&nbsp;&nbsp;👉 ฝั่งซ้าย {b} ตัด {b} หมดไป, ฝั่งขวา {c} ÷ {b} = {c//b}<br>
                         &nbsp;&nbsp;&nbsp;👉 <b>สมการล่าสุด:</b> 🔲 + {a} = {c//b}<br>
                         <b>ขั้นตอนที่ 2: หาค่า 🔲</b><br>
-                        &nbsp;&nbsp;&nbsp;👉 <b>นำ {a} มาลบออกทั้งสองข้างของสมการ</b><br>
+                        &nbsp;&nbsp;&nbsp;👉 นำ {a} มาลบออกทั้งสองข้างของสมการ<br>
+                        &nbsp;&nbsp;&nbsp;👉 🔲 + {a} <b style='color:red;'>- {a}</b> = {c//b} <b style='color:red;'>- {a}</b><br>
                         &nbsp;&nbsp;&nbsp;👉 ฝั่งซ้ายเหลือ 🔲, ฝั่งขวา {c//b} - {a} = {ans}<br>
                         &nbsp;&nbsp;&nbsp;👉 <b>สมการล่าสุด: 🔲 = {ans}</b><br>
                         <b>ตอบ: {ans}</b></span>"""
@@ -383,7 +389,7 @@ def generate_questions_logic(level, sub_t, num_q, is_challenge):
                     &nbsp;&nbsp;&nbsp;👉 พจน์กลางจะเปลี่ยนเป็น: {frac_sol_M1} = {frac_sol_M2}<br>
                     &nbsp;&nbsp;&nbsp;👉 <b>อสมการล่าสุด:</b> {frac_L} &lt; {frac_sol_M2} &lt; {frac_R}<br>
                     <b>ขั้นตอนที่ 2: กำจัดตัวส่วน {B*C} โดยใช้คุณสมบัติการคูณ</b><br>
-                    &nbsp;&nbsp;&nbsp;👉 นำ <b>{B*C} มาคูณตลอดทั้งอสมการ (คูณทุกพจน์)</b><br>
+                    &nbsp;&nbsp;&nbsp;👉 นำ {B*C} มาคูณตลอดทั้งอสมการ (คูณทุกพจน์)<br>
                     &nbsp;&nbsp;&nbsp;👉 ทุกพจน์จะถูกตัดตัวส่วนทิ้งไปทั้งหมด<br>
                     &nbsp;&nbsp;&nbsp;👉 <b>อสมการล่าสุด: {A} &lt; 🔲 × {C} &lt; {D}</b><br>
                     <b>ขั้นตอนที่ 3: หาค่า 🔲 ที่เป็นจำนวนนับ</b><br>
@@ -402,8 +408,8 @@ def generate_questions_logic(level, sub_t, num_q, is_challenge):
                     q = f"จงหา <b>จำนวนนับที่มากที่สุด</b> ที่เติมในช่องว่าง:<br><br><span style='font-size:24px; font-weight:bold;'>{box_html} + {a} &lt; {limit_val}</span>"
                     sol = f"""<span style='color: #2c3e50;'><b>วิธีคิดอย่างละเอียด (ใช้คุณสมบัติของอสมการ):</b><br>
                     <b>ขั้นตอนที่ 1:</b> จากอสมการ 🔲 + {a} &lt; {limit_val}<br>
-                    &nbsp;&nbsp;&nbsp;👉 เราต้องการหาค่า 🔲 จึงต้องกำจัด +{a} โดย<b>นำ {a} มาลบออกทั้งสองข้างของอสมการ</b><br>
-                    &nbsp;&nbsp;&nbsp;👉 เขียนเป็นอสมการใหม่ได้ว่า: 🔲 + {a} <b>- {a}</b> &lt; {limit_val} <b>- {a}</b><br>
+                    &nbsp;&nbsp;&nbsp;👉 เราต้องการหาค่า 🔲 จึงต้องกำจัด +{a} โดยนำ {a} มาลบออกทั้งสองข้างของอสมการ<br>
+                    &nbsp;&nbsp;&nbsp;👉 เขียนเป็นอสมการใหม่ได้ว่า: 🔲 + {a} <b style='color:red;'>- {a}</b> &lt; {limit_val} <b style='color:red;'>- {a}</b><br>
                     <b>ขั้นตอนที่ 2:</b> คำนวณผลลัพธ์ทั้งสองข้าง<br>
                     &nbsp;&nbsp;&nbsp;👉 ฝั่งซ้าย: {a} - {a} = 0 (เหลือ 🔲)<br>
                     &nbsp;&nbsp;&nbsp;👉 ฝั่งขวา: {limit_val} - {a} = {limit_val - a}<br>
@@ -444,12 +450,12 @@ def generate_questions_logic(level, sub_t, num_q, is_challenge):
                     &nbsp;&nbsp;&nbsp;👉 ตัวตั้ง {Y} ถูกยืมไป 1 เหลือ {Y-1} แต่ต้องลบ 🔲 ให้ได้ {str_Res[1]}<br>
                     &nbsp;&nbsp;&nbsp;👉 {Y-1} น้อยกว่า {str_Res[1]} จึงยืมหลักร้อยมา 10 กลายเป็น {10+Y-1}<br>
                     &nbsp;&nbsp;&nbsp;👉 สร้างสมการ: {10+Y-1} - 🔲 = {str_Res[1]}<br>
-                    &nbsp;&nbsp;&nbsp;👉 <b>นำ 🔲 บวกทั้งสองข้าง และนำ {str_Res[1]} ลบทั้งสองข้าง</b><br>
+                    &nbsp;&nbsp;&nbsp;👉 นำ 🔲 บวกทั้งสองข้าง และนำ {str_Res[1]} ลบทั้งสองข้าง<br>
                     &nbsp;&nbsp;&nbsp;👉 <b>สมการล่าสุด: 🔲 ตรงกลาง = {10+Y-1} - {str_Res[1]} = {B}</b><br>
                     <b>ขั้นตอนที่ 3: วิเคราะห์หลักร้อย</b><br>
                     &nbsp;&nbsp;&nbsp;👉 ตัวตั้ง 🔲 (บนสุด) ถูกหลักสิบยืมไป 1 จึงเหลือ (🔲 - 1)<br>
                     &nbsp;&nbsp;&nbsp;👉 สร้างสมการ: (🔲 - 1) - {A} = {str_Res[0]}<br>
-                    &nbsp;&nbsp;&nbsp;👉 <b>นำ {A} และ 1 บวกเพิ่มทั้งสองข้างของสมการ</b><br>
+                    &nbsp;&nbsp;&nbsp;👉 นำ {A} และ 1 บวกเพิ่มทั้งสองข้างของสมการ<br>
                     &nbsp;&nbsp;&nbsp;👉 <b>สมการล่าสุด: 🔲 บนสุด = {str_Res[0]} + {A} + 1 = {X}</b><br>
                     <b>ตอบ: บนคือ {X}, กลางคือ {B}, ล่างคือ {10+Z-C}</b></span>"""
                 else:
@@ -463,13 +469,13 @@ def generate_questions_logic(level, sub_t, num_q, is_challenge):
                         sol = f"""<span style='color: #2c3e50;'><b>วิธีคิดอย่างละเอียด (วิเคราะห์เป็นสมการทีละหลัก):</b><br>
                         <b>ขั้นตอนที่ 1: วิเคราะห์หลักหน่วย</b><br>
                         &nbsp;&nbsp;&nbsp;👉 สร้างสมการ: 🔲 (บน) + {str_b[1]} = {str_ans[1]}<br>
-                        &nbsp;&nbsp;&nbsp;👉 <b>นำ {str_b[1]} มาลบออกทั้งสองข้างของสมการ</b><br>
-                        &nbsp;&nbsp;&nbsp;👉 จะได้: 🔲 (บน) + {str_b[1]} <b>- {str_b[1]}</b> = {str_ans[1]} <b>- {str_b[1]}</b><br>
+                        &nbsp;&nbsp;&nbsp;👉 นำ {str_b[1]} มาลบออกทั้งสองข้างของสมการ<br>
+                        &nbsp;&nbsp;&nbsp;👉 จะได้: 🔲 (บน) + {str_b[1]} <b style='color:red;'>- {str_b[1]}</b> = {str_ans[1]} <b style='color:red;'>- {str_b[1]}</b><br>
                         &nbsp;&nbsp;&nbsp;👉 <b>สมการล่าสุด: 🔲 (บน) = {str_a[1]}</b><br>
                         <b>ขั้นตอนที่ 2: วิเคราะห์หลักสิบ</b><br>
                         &nbsp;&nbsp;&nbsp;👉 สร้างสมการ: {str_a[0]} + 🔲 (ล่าง) = {str_ans[0]}<br>
-                        &nbsp;&nbsp;&nbsp;👉 <b>นำ {str_a[0]} มาลบออกทั้งสองข้างของสมการ</b><br>
-                        &nbsp;&nbsp;&nbsp;👉 จะได้: {str_a[0]} <b>- {str_a[0]}</b> + 🔲 (ล่าง) = {str_ans[0]} <b>- {str_a[0]}</b><br>
+                        &nbsp;&nbsp;&nbsp;👉 นำ {str_a[0]} มาลบออกทั้งสองข้างของสมการ<br>
+                        &nbsp;&nbsp;&nbsp;👉 จะได้: {str_a[0]} <b style='color:red;'>- {str_a[0]}</b> + 🔲 (ล่าง) = {str_ans[0]} <b style='color:red;'>- {str_a[0]}</b><br>
                         &nbsp;&nbsp;&nbsp;👉 <b>สมการล่าสุด: 🔲 (ล่าง) = {str_b[0]}</b><br>
                         <b>ตอบ: กล่องบนคือ {str_a[1]}, กล่องล่างคือ {str_b[0]}</b></span>"""
                     else:
@@ -488,8 +494,8 @@ def generate_questions_logic(level, sub_t, num_q, is_challenge):
                         &nbsp;&nbsp;&nbsp;👉 ให้ตัวเลข 2 หลักด้านบนคือ "จำนวนปริศนา"<br>
                         &nbsp;&nbsp;&nbsp;👉 สมการคือ: จำนวนปริศนา × {n2} = {ans_val}<br>
                         <b>ขั้นตอนที่ 2: หาจำนวนปริศนาด้วยคุณสมบัติการเท่ากัน</b><br>
-                        &nbsp;&nbsp;&nbsp;👉 ต้องการกำจัด × {n2} จึง<b>นำ {n2} มาหารทั้งสองข้างของสมการ</b><br>
-                        &nbsp;&nbsp;&nbsp;👉 จะได้: (จำนวนปริศนา × {n2}) <b>÷ {n2}</b> = {ans_val} <b>÷ {n2}</b><br>
+                        &nbsp;&nbsp;&nbsp;👉 ต้องการกำจัด × {n2} จึงนำ {n2} มาหารทั้งสองข้างของสมการ<br>
+                        &nbsp;&nbsp;&nbsp;👉 จะได้: (จำนวนปริศนา × {n2}) <b style='color:red;'>÷ {n2}</b> = {ans_val} <b style='color:red;'>÷ {n2}</b><br>
                         &nbsp;&nbsp;&nbsp;👉 <b>สมการล่าสุด: จำนวนปริศนา = {n1}</b><br>
                         <b>ขั้นตอนที่ 3: หาตัวเลขที่หายไปในช่องว่าง</b><br>
                         &nbsp;&nbsp;&nbsp;👉 เนื่องจากจำนวนด้านบนคือ {n1} และโจทย์ให้หลักสิบมาคือ {str_n1[0]}<br>
@@ -529,8 +535,8 @@ def generate_questions_logic(level, sub_t, num_q, is_challenge):
                         &nbsp;&nbsp;&nbsp;👉 จัตุรัสมี 4 ด้านเท่ากัน สมมติให้ด้านยาว = 🔲<br>
                         &nbsp;&nbsp;&nbsp;👉 <b>สมการ: 4 × 🔲 = {L}</b><br>
                         <b>ขั้นตอนที่ 2: ใช้คุณสมบัติการเท่ากันหาค่า 🔲</b><br>
-                        &nbsp;&nbsp;&nbsp;👉 <b>นำ 4 มาหารทั้งสองข้างของสมการ</b><br>
-                        &nbsp;&nbsp;&nbsp;👉 (4 × 🔲) ÷ 4 = {L} ÷ 4<br>
+                        &nbsp;&nbsp;&nbsp;👉 นำ 4 มาหารทั้งสองข้างของสมการ<br>
+                        &nbsp;&nbsp;&nbsp;👉 (4 × 🔲) <b style='color:red;'>÷ 4</b> = {L} <b style='color:red;'>÷ 4</b><br>
                         &nbsp;&nbsp;&nbsp;👉 <b>สมการล่าสุด: 🔲 = {L//4} ซม.</b><br>
                         <b>ตอบ: {L//4} ซม.</b></span>"""
                     else:
@@ -544,12 +550,12 @@ def generate_questions_logic(level, sub_t, num_q, is_challenge):
                         &nbsp;&nbsp;&nbsp;👉 ลวดทั้งหมด = ลวดที่ใช้ทำ 4 ด้าน + ลวดที่เหลือ<br>
                         &nbsp;&nbsp;&nbsp;👉 <b>สมการ: (4 × 🔲) + {leftover} = {L}</b><br>
                         <b>ขั้นตอนที่ 2: ใช้คุณสมบัติการเท่ากันกำจัดเศษลวด</b><br>
-                        &nbsp;&nbsp;&nbsp;👉 <b>นำ {leftover} มาลบออกทั้งสองข้างของสมการ</b><br>
-                        &nbsp;&nbsp;&nbsp;👉 (4 × 🔲) + {leftover} - {leftover} = {L} - {leftover}<br>
+                        &nbsp;&nbsp;&nbsp;👉 นำ {leftover} มาลบออกทั้งสองข้างของสมการ<br>
+                        &nbsp;&nbsp;&nbsp;👉 (4 × 🔲) + {leftover} <b style='color:red;'>- {leftover}</b> = {L} <b style='color:red;'>- {leftover}</b><br>
                         &nbsp;&nbsp;&nbsp;👉 <b>สมการล่าสุด: 4 × 🔲 = {L - leftover}</b><br>
                         <b>ขั้นตอนที่ 3: ใช้คุณสมบัติการเท่ากันหาความยาวด้าน</b><br>
-                        &nbsp;&nbsp;&nbsp;👉 <b>นำ 4 มาหารทั้งสองข้างของสมการ</b><br>
-                        &nbsp;&nbsp;&nbsp;👉 (4 × 🔲) ÷ 4 = {L - leftover} ÷ 4<br>
+                        &nbsp;&nbsp;&nbsp;👉 นำ 4 มาหารทั้งสองข้างของสมการ<br>
+                        &nbsp;&nbsp;&nbsp;👉 (4 × 🔲) <b style='color:red;'>÷ 4</b> = {L - leftover} <b style='color:red;'>÷ 4</b><br>
                         &nbsp;&nbsp;&nbsp;👉 <b>สมการล่าสุด: 🔲 = {side}</b><br>
                         <b>ตอบ: {side} ซม.</b></span>"""
 
@@ -599,7 +605,8 @@ def generate_questions_logic(level, sub_t, num_q, is_challenge):
                         sol = f"""<span style='color: #2c3e50;'><b>วิธีคิด (สมการแบ่งกลุ่ม):</b><br>
                         <b>ขั้นตอนที่ 1: ตั้งสมการหาจำนวนต่อตะกร้า</b><br>
                         &nbsp;&nbsp;&nbsp;👉 สมการ: 🔲 (ชิ้นต่อตะกร้า) × {baskets} = {total_breads}<br>
-                        &nbsp;&nbsp;&nbsp;👉 <b>นำ {baskets} หารทั้งสองข้างของสมการ</b><br>
+                        &nbsp;&nbsp;&nbsp;👉 นำ {baskets} หารทั้งสองข้างของสมการ<br>
+                        &nbsp;&nbsp;&nbsp;👉 (🔲 × {baskets}) <b style='color:red;'>÷ {baskets}</b> = {total_breads} <b style='color:red;'>÷ {baskets}</b><br>
                         &nbsp;&nbsp;&nbsp;👉 <b>สมการล่าสุด: 🔲 = {breads_per_b} ชิ้น</b><br>
                         <b>ขั้นตอนที่ 2: ตั้งสมการหาผลรวมที่ต้องการ</b><br>
                         &nbsp;&nbsp;&nbsp;👉 สมการ: 🔲 (รวม) = {breads_per_b} × {ask_b}<br>
@@ -713,8 +720,8 @@ def generate_questions_logic(level, sub_t, num_q, is_challenge):
                     <b>ขั้นตอนที่ 3: คำนวณหาจำนวนหมู (M) ด้วยคุณสมบัติการเท่ากัน</b><br>
                     &nbsp;&nbsp;&nbsp;👉 หมูแต่ละตัวมี 4 ขา ซึ่งมากกว่าสัตว์ปีกอยู่ 2 ขา (4 - 2 = 2)<br>
                     &nbsp;&nbsp;&nbsp;👉 สมการจำนวนหมู: M × 2 = {L - H*2}<br>
-                    &nbsp;&nbsp;&nbsp;👉 <b>นำ 2 มาหารทั้งสองข้างของสมการ</b><br>
-                    &nbsp;&nbsp;&nbsp;👉 (M × 2) ÷ 2 = {L - H*2} ÷ 2<br>
+                    &nbsp;&nbsp;&nbsp;👉 นำ 2 มาหารทั้งสองข้างของสมการ<br>
+                    &nbsp;&nbsp;&nbsp;👉 (M × 2) <b style='color:red;'>÷ 2</b> = {L - H*2} <b style='color:red;'>÷ 2</b><br>
                     &nbsp;&nbsp;&nbsp;👉 <b>สมการล่าสุด: M = {P}</b><br>
                     <b>ตอบ: มีหมู {P} ตัว</b></span>"""
                 else:
@@ -804,7 +811,7 @@ def create_page(level, sub_t, questions, is_key=False, q_margin="20px", ws_heigh
         if is_key:
             html += f'{item["question"]}<div class="sol-text">{item["solution"]}</div>'
         else:
-            html += f'{item["question"]}<div class="workspace">พื้นที่สำหรับแสดงวิธีคิดวิเคราะห์...</div><div class="ans-line">ตอบ: </div>'
+            html += f'{item["question"]}<div class="workspace">พื้นที่สำหรับแสดงวิธีคิดวิเคราะห์เชิงสมการ...</div><div class="ans-line">ตอบ: </div>'
         html += '</div>'
         
     if brand_name: 
