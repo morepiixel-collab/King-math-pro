@@ -897,7 +897,7 @@ if st.sidebar.button(f"{'🚀 สั่งสร้างข้อสอบร�
         st.session_state['zip_data'] = zip_buffer.getvalue()
 
 if 'ebook_html' in st.session_state:
-    st.success(f"✅ โค้ดอัปเดตเรียบร้อยครับ! เปลี่ยนการอธิบายเป็นรูปแบบ Step by Step เชิงสมการ โดยระบุคุณสมบัติการเท่ากัน (นำ...มาบวก/ลบ/คูณ/หาร ทั้งสองข้าง) พร้อมสรุป 'สมการล่าสุด' ทุกบรรทัดครับ")
+    st.success(f"✅ ลิขสิทธิ์นี้เป็นของ บ้านทีเด็ด เท่านั้น ห้ามนำไปขาย หรือแจกจ่าย ก่อนได้รับอนุญาติ จาก บ้านทีเด็ด")
     c1, c2 = st.columns(2)
     with c1:
         st.download_button("📄 โหลดเฉพาะโจทย์", data=st.session_state['worksheet_html'], file_name=f"{st.session_state['filename_base']}_Worksheet.html", mime="text/html", use_container_width=True)
